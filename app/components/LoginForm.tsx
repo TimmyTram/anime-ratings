@@ -5,7 +5,11 @@ import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 
-const LoginForm = () => {
+interface LoginFormProps {
+    onLoginSuccess: () => void;
+}
+
+const LoginForm = ({ onLoginSuccess }: LoginFormProps) => {
     const [userInfo, setUserInfo] = useState({ login: '', password: '' });
     const [error, setError] = useState('');
     const [isInvalid, setIsInvalid] = useState(false);
@@ -29,34 +33,48 @@ const LoginForm = () => {
           passwordRef.current?.focus(); // Set focus to password field
         } else {
           toast.success(`Welcome ${userInfo.login}!`);
+          onLoginSuccess();
           router.push('/');
         }
       };
 
     
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className="text-black flex flex-col items-center justify-center gap-12">
+            <h1 className="text-4xl font-bold text-white">
+                Login to your Account
+            </h1>
+            
+            
+            <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center gap-4">
                 <div>
-                    <label htmlFor="login">Login</label>
                     <input
                         id="login"
                         type="text"
+                        placeholder="Type Your Username"
                         value={userInfo.login}
                         onChange={(e) => setUserInfo({ ...userInfo, login: e.target.value })}
+                        autoComplete='off'
+                        className="text-white placeholder-white bg-primary border-b-4 border-b-white p-2 focus:outline-white"
                     />
                 </div>
                 <div>
-                    <label htmlFor="password">Password</label>
                     <input
                         id="password"
                         type="password"
+                        placeholder="Type Your Password"
                         value={userInfo.password}
                         onChange={(e) => setUserInfo({ ...userInfo, password: e.target.value })}
                         ref={passwordRef}
+                        autoComplete='off'
+                        className="text-white placeholder-white bg-primary border-b-4 border-b-white p-2 focus:outline-white"
                     />
                 </div>
-                <button type="submit">Login</button>
+
+
+                <button type="submit" className="text-white font-bold bg-complementary border-2 border-complementary rounded-full px-4 py-2 shadow-md hover:bg-softcomplementary">Login</button>
+
+
                 {error && <p>{error}</p>}
             </form>
         </div>
