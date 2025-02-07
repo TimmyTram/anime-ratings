@@ -1,15 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../prisma/prisma";
-import { UserData } from "@/types/UserData";
-import { checkRequiredArgs } from "@/utils/utils";
-import { ArgumentError } from "../../../types/ArgumentError";
+import { UserData } from "../../types/UserData";
+import { checkRequiredArgs } from "../../utils/utils";
+import { ArgumentError } from "../../types/ArgumentError";
 import bcrypt from "bcryptjs";
 
 export const dynamic = 'force-dynamic'
 
 export async function GET() {
     try {
-        const users = await prisma.user.findMany();
+        const users = await prisma.user.findMany(
+            {
+                omit: {
+                    password: true
+                }
+            }
+        );
         return NextResponse.json(users);
     } catch (error : any) {
         console.log(`[ERROR]: Error in GET /api/users/route.ts: ${error.message}`);
