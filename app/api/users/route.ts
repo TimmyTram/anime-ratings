@@ -3,6 +3,7 @@ import prisma from "../../../prisma/prisma";
 import { UserData } from "@/types/UserData";
 import { checkRequiredArgs } from "@/utils/utils";
 import { ArgumentError } from "../../../types/ArgumentError";
+import bcrypt from "bcryptjs";
 
 export const dynamic = 'force-dynamic'
 
@@ -23,10 +24,27 @@ export async function POST(req: NextRequest) {
         checkRequiredArgs(body, ["username", "password"]);
 
 
+        const existingUser = await prisma.user.findFirst({
+            where: {
+                username: body.username
+            }
+        })
+
+        if (existingUser) {
+            return NextResponse.json( { error: "Username already exists." }, { status: 400 });
+        }
+
+        if(body.password.length < 6) {
+            return NextResponse.json( { error: "Password must be at least 6 characters long." }, { status: 400 });
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(body.password, salt);
+        
         const user = await prisma.user.create({
             data: {
                 username: body.username,
-                password: body.password
+                password: hashedPassword
             }
         });
 
