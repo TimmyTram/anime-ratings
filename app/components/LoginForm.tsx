@@ -33,19 +33,15 @@ const LoginForm = ({ onLoginSuccess }: LoginFormProps) => {
           passwordRef.current?.focus(); // Set focus to password field
         } else {
           toast.success(`Welcome ${userInfo.login}!`);
+
+          // let parent component know that login was successful
           onLoginSuccess();
-          router.push('/');
+          //router.push('/');
         }
       };
 
-    
     return (
-        <div className="text-black flex flex-col items-center justify-center gap-12">
-            <h1 className="text-4xl font-bold text-white">
-                Login to your Account
-            </h1>
-            
-            
+        <div className="text-black flex flex-col items-center justify-center gap-12"> 
             <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center gap-4">
                 <div>
                     <input
@@ -70,12 +66,8 @@ const LoginForm = ({ onLoginSuccess }: LoginFormProps) => {
                         className="text-white placeholder-white bg-primary border-b-4 border-b-white p-2 focus:outline-white"
                     />
                 </div>
-
-
                 <button type="submit" className="text-white font-bold bg-complementary border-2 border-complementary rounded-full px-4 py-2 shadow-md hover:bg-softcomplementary">Login</button>
-
-
-                {error && <p>{error}</p>}
+                {error && <p className="font-bold text-angryred">{error}</p>}
             </form>
         </div>
     );

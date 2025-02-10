@@ -27,6 +27,8 @@ const SignupForm = ({ onSignupSuccess }: SignupFormProps) => {
 
         if (status.success) {
             toast.success(status.message);
+
+            // let parent component know that signup was successful
             onSignupSuccess();
         } else {
             toast.error(status.message);
@@ -35,10 +37,6 @@ const SignupForm = ({ onSignupSuccess }: SignupFormProps) => {
 
     return (
         <div className="text-black flex flex-col items-center justify-center gap-12">
-            <h1 className="text-4xl font-bold text-white">
-                Create an Account
-            </h1>
-
             <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center gap-4">
                 <div>
                     <input

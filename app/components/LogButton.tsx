@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import LoginForm from "./LoginForm";
 import Modal from "./Modal";
+import AuthFormHandler from "./AuthFormHandler";
 
 // handles both logging in and logging out
 const LogButton = () => {
@@ -16,7 +17,8 @@ const LogButton = () => {
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
-    const handleLoginSucess = () => {
+    // child component will call this function on successful login, close modal
+    const handleSuccess = () => {
         closeModal();
     }
 
@@ -25,7 +27,7 @@ const LogButton = () => {
         const status = await signOut({ redirect: false });
         if (status) {
             toast.success('You have been logged out successfully!');
-            router.push('/');
+            // router.push('/');
         } else {
             toast.error('An error occurred while logging out. Please try again.');
         }
@@ -44,7 +46,7 @@ const LogButton = () => {
                         Login
                     </button>
                     <Modal isOpen={isModalOpen} onClose={closeModal}>
-                        <LoginForm onLoginSuccess={handleLoginSucess} />
+                        <AuthFormHandler onSuccess={handleSuccess} />
                     </Modal>
                 </div>
             )}
