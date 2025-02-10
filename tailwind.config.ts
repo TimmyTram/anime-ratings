@@ -6,11 +6,13 @@ const config: Config = {
     extend: {
       colors: {
         primary: "#75b7ea",
-        secondary: "#434343",
-        complementary: "#a1e3d8",
+        secondary: "#3a4856",
+        complementary: "#3dc08d",
         angryred: "#f75d5d",
         softangryred: "#f88a8a",
-        softcomplementary: "#b9f0e1",
+        softcomplementary: "#70DAB0",
+        purplegrad: "#8788cd",
+        softpurplegrad: "#B0B1E3",
       }
     },
   },

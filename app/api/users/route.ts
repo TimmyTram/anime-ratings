@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../prisma/prisma";
 import { UserData } from "../../types/UserData";
-import { checkRequiredArgs } from "../../utils/utils";
+import { checkRequiredArgsFilled } from "../../utils/utils";
 import { ArgumentError } from "../../types/ArgumentError";
 import bcrypt from "bcryptjs";
 
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     try {
         const body: UserData = await req.json();
         
-        checkRequiredArgs(body, ["username", "password"]);
+        checkRequiredArgsFilled(body, ["username", "password"]);
 
 
         const existingUser = await prisma.user.findFirst({
@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
             }
         });
 
-        return NextResponse.json(user, { status: 201 });
+        return NextResponse.json({ message: `User: ${user.username} was successfully created!`}, { status: 201 });
     } catch (error: any) {
         if (error instanceof ArgumentError) {
             console.log(`[ERROR]: Error in POST /api/users/route.ts: ${error.message}`);
@@ -63,8 +63,5 @@ export async function POST(req: NextRequest) {
 
         console.log(`[ERROR]: Error in POST /api/users/route.ts: ${error.message}`);
         return NextResponse.json( { error: "Internal Server Error." }, { status: 500 });
-    }
-    
-    
-    
+    }  
 }

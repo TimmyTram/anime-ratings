@@ -36,8 +36,6 @@ const LogButton = () => {
             {session ? (
                 <button onClick={handleLogout} className="bg-angryred border-angryred border-2 px-4 py-2 shadow-md rounded-full hover:bg-softangryred">Logout</button>
             ) : (
-                // <button onClick={() => router.push('/auth/login')} className="bg-complementary border-complementary border-2 px-4 py-2 shadow-md rounded-full hover:bg-softcomplementary">Login</button>
-
                 <div>
                     <button
                         onClick={openModal}
