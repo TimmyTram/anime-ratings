@@ -4,7 +4,6 @@ import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useState } from "react";
-import LoginForm from "./LoginForm";
 import Modal from "./Modal";
 import AuthFormHandler from "./AuthFormHandler";
 
