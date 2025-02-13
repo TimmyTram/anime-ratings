@@ -11,6 +11,7 @@ export interface AnimeData {
     images: {
         jpg: {
             image_url: string; // MAL image url
+            large_image_url: string; // MAL large image url
         }
     }
 };

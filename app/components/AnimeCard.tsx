@@ -7,16 +7,29 @@ type AnimeCardProps = {
 
 const AnimeCard = ({ anime }: AnimeCardProps) => {
     return (
-        <div className="flex flex-col bg-complementary h-full">
-            <Image 
-                src={anime.images.jpg.image_url} 
-                alt={anime.title} 
-                width={256} 
-                height={384} // Adjust height to match aspect ratio
-                className="w-full h-[80%] object-cover"
+
+        // TODO: Change the colors of the border and hover border
+        <div className="flex flex-col bg-complementary h-full max-h-[500px] border border-4 border-primary rounded-lg cursor-pointer hover:border-angryred transition duration-300 ease-in-out">
+            <Image
+            src={anime.images.jpg.image_url}
+            alt={anime.title}
+            width={256}
+            height={384}
+            className="w-full h-[80%] object-cover"
+            priority
             />
-            <div className="h-[20%] flex items-center justify-center bg-green-500 text-white text-sm text-center p-2">
-                {anime.title}
+            <div className="h-[20%] flex flex-col items-center justify-center text-white text-sm text-center p-2">
+                <div className="text-lg font-bold text-ellipsis overflow-hidden whitespace-nowrap">
+                    {anime.title}
+                </div>
+
+                <div className="text-sm text-gray-300">
+                    Release Date: <span className="font-medium">{anime.year ?? "N/A"}</span>
+                </div>
+
+                <div className="text-sm text-gray-200 line-clamp-2">
+                    {anime.synopsis}
+                </div>
             </div>
         </div>
     );
