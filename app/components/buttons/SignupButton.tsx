@@ -21,7 +21,7 @@ const SignupButton = () => {
 
     return (
         <div>
-            <button onClick={openModal} className="bg-purplegrad border-purplegrad border-2 px-4 py-2 shadow-md rounded-full hover:bg-softpurplegrad">Sign Up</button>
+            <button onClick={openModal} className="bg-purplegrad border-purplegrad border-2 px-4 py-2 shadow-md rounded-full hover:bg-softpurplegrad transition-colors duration-300">Sign Up</button>
             <Modal isOpen={isModalOpen} onClose={closeModal}>
                 <AuthFormHandler onSuccess={handleSuccess} defaultToSignup={true} />
             </Modal>

@@ -35,12 +35,12 @@ const LogButton = () => {
     return (
         <div>
             {session ? (
-                <button onClick={handleLogout} className="bg-angryred border-angryred border-2 px-4 py-2 shadow-md rounded-full hover:bg-softangryred">Logout</button>
+                <button onClick={handleLogout} className="bg-angryred border-angryred border-2 px-4 py-2 shadow-md rounded-full hover:bg-softangryred transition-colors duration-300">Logout</button>
             ) : (
                 <div>
                     <button
                         onClick={openModal}
-                        className="bg-complementary border-complementary border-2 px-4 py-2 shadow-md rounded-full hover:bg-softcomplementary"
+                        className="bg-complementary border-complementary border-2 px-4 py-2 shadow-md rounded-full hover:bg-softcomplementary transition-colors duration-300"
                     >
                         Login
                     </button>
