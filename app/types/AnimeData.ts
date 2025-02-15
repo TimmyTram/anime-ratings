@@ -14,4 +14,15 @@ export interface AnimeData {
             large_image_url: string; // MAL large image url
         }
     }
+    airing: boolean;
+    background: string;
+    broadcast: {
+        day: string;
+        time: string;
+        timezone: string;
+        string: string;
+    };
+    duration: string;
+    episodes: number;
+    genres: [];
 };

@@ -12,14 +12,18 @@ const AnimeCard = ({ anime }: AnimeCardProps) => {
         // TODO: Change the colors of the border and hover border
         <AnimeCardClickable anime={anime}>
             <div className="flex flex-col bg-complementary h-full max-h-[500px] border border-4 border-primary rounded-lg cursor-pointer hover:border-angryred transition duration-300 ease-in-out">
-                <Image
-                    src={anime.images.jpg.image_url}
-                    alt={anime.title}
-                    width={256}
-                    height={384}
-                    className="w-full h-[80%] object-cover"
-                    priority
-                />
+                <div className="relative w-full h-[384px]">
+                    <Image
+                        src={anime.images.jpg.large_image_url}
+                        alt={anime.title}
+                        fill
+                        className="object-cover"
+                        priority
+                        quality={90}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 256px"
+                    />
+                </div>
+
                 <div className="h-[20%] flex flex-col items-center justify-center text-white text-sm text-center p-2">
                     <div className="text-lg font-bold text-ellipsis overflow-hidden whitespace-nowrap">
                         {anime.title}
