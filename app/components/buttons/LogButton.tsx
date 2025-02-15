@@ -4,8 +4,8 @@ import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useState } from "react";
-import Modal from "./Modal";
-import AuthFormHandler from "./AuthFormHandler";
+import Modal from "../ui/Modal";
+import AuthFormHandler from "../auth/AuthFormHandler";
 
 // handles both logging in and logging out
 const LogButton = () => {
@@ -35,12 +35,12 @@ const LogButton = () => {
     return (
         <div>
             {session ? (
-                <button onClick={handleLogout} className="bg-angryred border-angryred border-2 px-4 py-2 shadow-md rounded-full hover:bg-softangryred">Logout</button>
+                <button onClick={handleLogout} className="bg-angryred border-angryred border-2 px-4 py-2 shadow-md rounded-full hover:bg-softangryred transition-colors duration-300">Logout</button>
             ) : (
                 <div>
                     <button
                         onClick={openModal}
-                        className="bg-complementary border-complementary border-2 px-4 py-2 shadow-md rounded-full hover:bg-softcomplementary"
+                        className="bg-complementary border-complementary border-2 px-4 py-2 shadow-md rounded-full hover:bg-softcomplementary transition-colors duration-300"
                     >
                         Login
                     </button>
