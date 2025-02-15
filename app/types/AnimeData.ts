@@ -26,6 +26,32 @@ export interface AnimeData {
     episodes: number;
     genres: AnimeGenres[];
     trailer: AnimeTrailer;
+    source: string;
+    season: string;
+    producers: AnimeProducers[];
+    licensors: AnimeLicensors[];
+    studios: AnimeStudios[];
+};
+
+export interface AnimeStudios {
+    mal_id: number;
+    type: string;
+    name: string;
+    url: string;
+};
+
+export interface AnimeLicensors {
+    mal_id: number;
+    type: string;
+    name: string;
+    url: string;
+};
+
+export interface AnimeProducers {
+    mal_id: number;
+    type: string;
+    name: string;
+    url: string;
 };
 
 export interface AnimeGenres {
@@ -33,9 +59,9 @@ export interface AnimeGenres {
     type: string;
     name: string;
     url: string;
-}
+};
 
 export interface AnimeTrailer {
     embed_url: string;
     url: string;
-}
+};

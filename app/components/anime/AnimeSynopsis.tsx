@@ -5,7 +5,7 @@ interface AnimeSynopsisProps {
 
 const AnimeSynopsis = ({ synopsis }: AnimeSynopsisProps) => {
     return (
-        <div className="flex flex-col gap-4 w-full sm:max-w-[600px] lg:max-w-[1600px] pb-12">
+        <div className="flex flex-col gap-4 w-full sm:max-w-[600px] lg:max-w-[1600px]">
                 <h2 className="text-xl font-bold">Synopsis:</h2>
                 <p className="font-semibold">{synopsis}</p>
         </div>

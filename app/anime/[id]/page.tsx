@@ -7,6 +7,8 @@ import AnimeSynopsis from "@/app/components/anime/AnimeSynopsis";
 import AnimeGenre from "@/app/components/anime/AnimeGenre";
 import AnimeDetails from "@/app/components/anime/AnimeDetails";
 import AnimeVideoTrailer from "@/app/components/anime/AnimeVideoTrailer";
+import AnimeBackgroundInfo from "@/app/components/anime/AnimeBackgroundInfo";
+import AnimeProductionInfo from "@/app/components/anime/AnimeProductionInfo";
 
 const Page = () => {
     const { id } = useParams();
@@ -25,6 +27,10 @@ const Page = () => {
             <AnimeGenre genre={anime?.genres} />
             <Divider />
             <AnimeSynopsis synopsis={anime?.synopsis} />
+            <Divider />
+            <AnimeBackgroundInfo background={anime?.background} source={anime?.source} season={anime?.season} />
+            <Divider />
+            <AnimeProductionInfo producers={anime?.producers} licensors={anime?.licensors} studios={anime?.studios} />
         </div>
     );
 };
