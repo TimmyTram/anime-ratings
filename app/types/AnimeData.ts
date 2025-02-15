@@ -25,11 +25,17 @@ export interface AnimeData {
     duration: string;
     episodes: number;
     genres: AnimeGenres[];
+    trailer: AnimeTrailer;
 };
 
 export interface AnimeGenres {
     mal_id: number;
     type: string;
     name: string;
+    url: string;
+}
+
+export interface AnimeTrailer {
+    embed_url: string;
     url: string;
 }
