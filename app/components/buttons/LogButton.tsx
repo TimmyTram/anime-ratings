@@ -4,8 +4,8 @@ import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useState } from "react";
-import Modal from "./Modal";
-import AuthFormHandler from "./AuthFormHandler";
+import Modal from "../ui/Modal";
+import AuthFormHandler from "../auth/AuthFormHandler";
 
 // handles both logging in and logging out
 const LogButton = () => {

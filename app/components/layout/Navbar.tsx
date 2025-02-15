@@ -1,5 +1,5 @@
-import SignupButton from "./SignupButton";
-import LogButton from "./LogButton";
+import SignupButton from "../buttons/SignupButton";
+import LogButton from "../buttons/LogButton";
 
 const Navbar = () => {
 

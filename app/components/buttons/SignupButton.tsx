@@ -2,8 +2,8 @@
 
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import Modal from "./Modal";
-import AuthFormHandler from "./AuthFormHandler";
+import Modal from "../ui/Modal";
+import AuthFormHandler from "../auth/AuthFormHandler";
 
 const SignupButton = () => {
     const { data: session } = useSession();

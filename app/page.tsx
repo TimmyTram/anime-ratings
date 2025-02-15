@@ -1,8 +1,8 @@
 'use client';
 
-import ContentGrid from "./components/ContentGrid";
-import Navbar from "./components/Navbar";
-import AnimeCard from "./components/AnimeCard";
+import ContentGrid from "./components/layout/ContentGrid";
+import Navbar from "./components/layout/Navbar";
+import AnimeCard from "./components/anime/AnimeCard";
 import useTopAnime from "./hooks/useTopAnime";
 
 export default function Home() {

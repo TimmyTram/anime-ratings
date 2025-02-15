@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { UserData } from '../types/UserData';
-import useCreateUser from '../hooks/useCreateUser';
+import { UserData } from '../../types/UserData';
+import useCreateUser from '../../hooks/useCreateUser';
 import { toast } from 'react-hot-toast';
 
 interface SignupFormProps {
