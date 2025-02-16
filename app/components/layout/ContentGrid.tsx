@@ -27,7 +27,7 @@ const ContentGrid = ({ children, loading, error }: ContentGridProps) => {
 
 
     return (
-        <div className="grid grid-cols-4 grid-rows-2 gap-4 p-4 container mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-rows-auto gap-4 p-4 container mx-auto">
             {children}
         </div>
     )

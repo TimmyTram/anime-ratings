@@ -25,7 +25,7 @@ const AnimeCard = ({ anime }: AnimeCardProps) => {
                 </div>
 
                 <div className="h-[20%] flex flex-col items-center justify-center text-white text-sm text-center p-2">
-                    <div className="text-lg font-bold text-ellipsis overflow-hidden whitespace-nowrap">
+                    <div className="text-lg font-bold truncate w-full">
                         {anime.title}
                     </div>
 
