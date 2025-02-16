@@ -1,6 +1,6 @@
 'use client';
 
-import useFetchAnimeById from "../../hooks/useFetchAnimeById"
+import useFetchAnimeById from "../../hooks/jikan/useFetchAnimeById"
 import { useParams } from "next/navigation";
 import Divider from "@/app/components/ui/Divider";
 import AnimeSynopsis from "@/app/components/anime/AnimeSynopsis";
