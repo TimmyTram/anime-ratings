@@ -28,6 +28,7 @@ const useFetchAnimeByName = () => {
         }
     };
 
+
     return { animeList, loading, fetchAnimeByName };
 };
 

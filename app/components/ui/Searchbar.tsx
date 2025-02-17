@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import SearchIcon from '../icons/Search.icon';
 import { useRouter, useSearchParams } from 'next/navigation';
 import useFetchAnimeByName from '../../hooks/jikan/useFetchAnimeByName';
@@ -15,15 +15,31 @@ const Searchbar = ({ onAnimeListChange }: SearchbarProps) => {
     const [searchTerm, setSearchTerm] = useState(q);
     const router = useRouter();
     const { animeList, loading, fetchAnimeByName } = useFetchAnimeByName();
+    const hasFetched = useRef(false);
+    const isUserSubmitted = useRef(false); // Track if the fetch is triggered by a user action
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (searchTerm === '') return;
+
+        hasFetched.current = true;
+        isUserSubmitted.current = true;
         const status = await fetchAnimeByName(searchTerm);
         if (status.success) {
             router.push(`/search?q=${searchTerm}`, undefined);
         }
     };
+
+    
+
+    // fetch anime when landing on /search?q=
+    useEffect(() => {
+        if (q && !isUserSubmitted.current && !hasFetched.current) {
+            fetchAnimeByName(q);
+            hasFetched.current = true;
+        }
+        isUserSubmitted.current = false;
+    }, [q, fetchAnimeByName]);
 
     // re-render when animeList actually changes
     useEffect(() => {

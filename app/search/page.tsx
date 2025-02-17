@@ -3,14 +3,19 @@
 import AnimeCard from "../components/anime/AnimeCard";
 import ContentGrid from "../components/layout/ContentGrid";
 import Searchbar from "../components/ui/Searchbar";
-import { useState, Suspense } from 'react';
+import { useState, Suspense, useCallback } from 'react';
 
 const Page = () => {
     // make a type for this later
     const [animeList, setAnimeList] = useState<any[]>([]);
 
-    const handleAnimeListChange = (newAnimeList: any[]) => setAnimeList(newAnimeList);
+    // const handleAnimeListChange = (newAnimeList: any[]) => setAnimeList(newAnimeList);
 
+    const handleAnimeListChange = useCallback((newAnimeList: any[]) => {
+        setAnimeList(newAnimeList);
+    }, []);
+
+    console.log(animeList);
 
     return (
         <div className="w-screen min-h-screen flex flex-col bg-secondary">
