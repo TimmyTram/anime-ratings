@@ -1,35 +1,37 @@
 import { useState } from 'react';
 
 const useFetchAnimeByName = () => {
-    const [animeList, setAnimeList] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    const fetchAnimeByName = async (name: string) => {
+    const fetchAnimeByName = async (name: string, page: number = 1, limit: number = 8) => {
         if (loading) return { success: false, message: 'Already fetching data' };  // Prevents multiple fetches
 
         try {
             setLoading(true);
-            console.log(`[INFO]: Calling api jikan.moe for anime with name: ${name}`);
-            const res = await fetch(`https://api.jikan.moe/v4/anime?q=${name}`);
+            console.log(`[INFO]: Calling api jikan.moe for anime with name: ${name}, page: ${page}, limit: ${limit}`);
+            const res = await fetch(`https://api.jikan.moe/v4/anime?q=${name}&page=${page}&limit=${limit}`);
             const data = await res.json();
             if (data.error) throw new Error(data.error);
-            setAnimeList(data.data);  // State will update here
             return {
                 success: true,
-                message: 'Anime fetched successfully'
+                message: 'Anime fetched successfully',
+                animeList: data.data,
+                pagination: data.pagination,
             };
         } catch (error: any) {
             return {
                 success: false,
-                message: error.message
+                message: error.message,
+                animeList: [],
+                pagination: {},
             };
         } finally {
-            setLoading(false);  // Reset loading flag after fetching
+            setLoading(false);
         }
     };
 
 
-    return { animeList, loading, fetchAnimeByName };
+    return { loading, fetchAnimeByName };
 };
 
 
