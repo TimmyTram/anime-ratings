@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { UserData } from '../types/UserData';
+import { UserData } from '../../types/UserData';
 
 const useCreateUser = () => {
     const [loading, setLoading] = useState(false);

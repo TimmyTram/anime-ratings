@@ -1,9 +1,8 @@
 'use client';
 
 import ContentGrid from "./components/layout/ContentGrid";
-import Navbar from "./components/layout/Navbar";
 import AnimeCard from "./components/anime/AnimeCard";
-import useTopAnime from "./hooks/useTopAnime";
+import useTopAnime from "./hooks/jikan/useTopAnime";
 
 export default function Home() {
   const { animeList, loading, error } = useTopAnime();

@@ -5,7 +5,7 @@ interface AnimeVideoTrailerProps {
 };
 
 const AnimeVideoTrailer = ({ animeTrailer }: AnimeVideoTrailerProps) => {
-    if (!animeTrailer) return null;
+    if (!animeTrailer || !animeTrailer.embed_url) return null;
 
     // jikan api v4 embed url has autoplay=1, we need to change it to autoplay=0
     const updatedEmbedUrl = animeTrailer.embed_url.includes('autoplay=1') 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { AnimeData } from '../types/AnimeData';
+import { AnimeData } from '../../types/AnimeData';
 
 /**
  * This will only run once per render
