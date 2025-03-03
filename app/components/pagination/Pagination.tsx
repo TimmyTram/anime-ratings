@@ -60,7 +60,7 @@ const Pagination = () => {
     };
 
     return (
-        <div className="pagination flex items-center justify-center space-x-2 mt-8">
+        <div className="pagination flex items-center justify-center space-x-2 mt-8 pb-12">
             <button
                 onClick={handlePrevious}
                 disabled={currentPage === 1 || currentPage === undefined}
