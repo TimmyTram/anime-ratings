@@ -3,13 +3,15 @@
 import ContentGrid from "./ContentGrid";
 import AnimeCard from "../anime/AnimeCard";
 import { useSearchContext } from "../../context/SearchContextProvider";
-import Pagination from "../pagination/Pagination";
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import useFetchAnimeByName from "../../hooks/jikan/useFetchAnimeByName";
+import Pagination from "../pagination/Pagination";
 
 const SearchResults = () => {
-    const { animeList, setSearchTerm, setCurrentPage } = useSearchContext();
+    const { animeList, currentPage, pagination, setSearchTerm, setCurrentPage, searchTerm, setAnimeList, setPagination } = useSearchContext();
     const searchParams = useSearchParams();
+    const { fetchAnimeByName } = useFetchAnimeByName();
     
     useEffect(() => {
         const queryTerm = searchParams.get('q');
@@ -27,7 +29,15 @@ const SearchResults = () => {
                     <AnimeCard key={index} anime={anime} />
                 ))}
             </ContentGrid>
-            <Pagination />
+            <Pagination 
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                pagination={pagination}
+                fetchAnimeByName={(page, searchTerm) => fetchAnimeByName(searchTerm, page)}
+                searchTerm={searchTerm}
+                setAnimeList={setAnimeList}
+                setPagination={setPagination}
+            />
         </div>
     );
 };
