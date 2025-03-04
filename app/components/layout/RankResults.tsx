@@ -3,11 +3,11 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { AnimeData } from '../../types/AnimeData';
-import ContentGrid from '../layout/ContentGrid';
+import ContentGrid from './ContentGrid';
 import AnimeCard from '../anime/AnimeCard';
 import TestPagination from '../pagination/testPagination';
 
-const PageWrapper = () => {
+const RankResults = () => {
     const router = useRouter();
     let initialPage = 1;
     const searchParams = useSearchParams();
@@ -21,7 +21,6 @@ const PageWrapper = () => {
         fetch(`https://api.jikan.moe/v4/top/anime?page=${currentPage}&limit=${limit}`)
             .then(response => response.json())
             .then(data => {
-
                 setAnimeList(data.data);
                 setTotalPages(data.pagination.last_visible_page);
             });
@@ -44,4 +43,4 @@ const PageWrapper = () => {
     );
 };
 
-export default PageWrapper;
+export default RankResults;

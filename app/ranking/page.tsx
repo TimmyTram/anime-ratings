@@ -1,19 +1,14 @@
 'use client';
 
 import { Suspense } from "react";
-import { AnimeContextProvider } from "../context/AnimeContextProvider";
-import RankingResults from "../components/layout/RankingResults";
+import RankResults from "../components/layout/RankResults";
 
 const Page = () => {
-  return (
-    <AnimeContextProvider>
-      <div className="w-screen min-h-screen flex flex-col bg-secondary">
-        <Suspense fallback={<div>Loading...</div>} >
-          <RankingResults />
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <RankResults />
         </Suspense>
-      </div>
-    </AnimeContextProvider>
-  );
+    );
 };
 
 export default Page;
