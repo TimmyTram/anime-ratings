@@ -15,7 +15,7 @@ const MangaDetails = ({ manga }: MangaDetailsProps) => {
     console.log(manga);
     
     return (
-        <div className="flex flex-row gap-4">
+        <div className="flex flex-row gap-4 px-4 sm:px-8">
             {manga && (
                 <Image
                     src={manga.images.jpg.large_image_url}

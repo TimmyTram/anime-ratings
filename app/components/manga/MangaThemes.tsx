@@ -6,7 +6,7 @@ interface MangaThemesProps {
 
 const MangaThemes = ({ themes }: MangaThemesProps) => {
     return (
-        <div className="flex flex-row gap-4">
+        <div className="flex flex-col gap-4 md:flex-row md:gap-4">
             <h2 className="text-xl font-bold flex items-center justify-center">Themes:</h2>
             {themes && themes.map((theme) => (
                 <span

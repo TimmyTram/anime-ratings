@@ -3,9 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { debounce } from 'lodash';
-import { AnimeData } from '../../types/AnimeData';
 
-const useAnimeSearch = (limit: number = 8, mangaToggle: boolean = false) => {
+const useJikanSearch = <T>(limit: number = 8, mangaToggle: boolean = false) => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const initialPage = parseInt(searchParams.get('page') || '1', 10);
@@ -13,32 +12,32 @@ const useAnimeSearch = (limit: number = 8, mangaToggle: boolean = false) => {
 
     const [currentPage, setCurrentPage] = useState(initialPage);
     const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
-    const [animeList, setAnimeList] = useState<AnimeData[]>([]);
+    const [dataList, setDataList] = useState<T[]>([]);
     const [totalPages, setTotalPages] = useState(1);
 
     // Debounced fetch function
     useEffect(() => {
-        const debouncedFetchAnimeData = debounce((searchTerm: string) => {
+        const debouncedFetchData = debounce((searchTerm: string) => {
             const endpoint = mangaToggle ? `https://api.jikan.moe/v4/manga?q=${searchTerm}&page=${currentPage}&limit=${limit}`
                 : `https://api.jikan.moe/v4/anime?q=${searchTerm}&page=${currentPage}&limit=${limit}`;
 
             fetch(endpoint)
                 .then(response => response.json())
                 .then(data => {
-                    setAnimeList(data.data);
+                    setDataList(data.data);
                     setTotalPages(data.pagination.last_visible_page);
                 });
         }, 500);
 
         if (searchTerm) {
-            debouncedFetchAnimeData(searchTerm);
+            debouncedFetchData(searchTerm);
         } else {
-            setAnimeList([]);
+            setDataList([]);
             setCurrentPage(1);  // Reset page if no search term
         }
 
         return () => {
-            debouncedFetchAnimeData.cancel();
+            debouncedFetchData.cancel();
         };
     }, [searchTerm, currentPage, limit, mangaToggle]);
 
@@ -64,13 +63,13 @@ const useAnimeSearch = (limit: number = 8, mangaToggle: boolean = false) => {
     };
 
     return {
+        dataList,
         searchTerm,
         setSearchTerm: handleSearchTermChange,
-        animeList,
         currentPage,
         setCurrentPage: handlePageChange,
         totalPages
     };
 };
 
-export default useAnimeSearch;
+export default useJikanSearch;

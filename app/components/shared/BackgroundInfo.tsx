@@ -6,8 +6,8 @@ interface BackgroundInfoProps {
 
 const BackgroundInfo = ({ background, source, season }: BackgroundInfoProps) => {
     return (
-        <div className="flex flex-col gap-4 w-full sm:max-w-[600px] lg:max-w-[1600px]">
-            <h2 className="text-xl font-bold">Background Information:</h2>
+        <div className="flex flex-col gap-4 w-full sm:max-w-[600px] lg:max-w-[1600px] px-4 sm:px-8">
+            <h2 className="text-xl font-bold text-center sm:text-left">Background Information:</h2>
             <p className="font-semibold">{background}</p>
             {source && <p className="font-semibold">Source: {source}</p>}
             {season && <p className="font-semibold">Season: {season}</p>}

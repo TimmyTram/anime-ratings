@@ -11,7 +11,7 @@ interface AnimeDetailsProps {
 
 const AnimeDetails = ({ anime }: AnimeDetailsProps) => {
     return (
-        <div className="flex flex-row gap-4">
+        <div className="flex flex-row gap-4 px-4 sm:px-8">
                     {anime && (
                         <Image
                             src={anime.images.jpg.large_image_url}

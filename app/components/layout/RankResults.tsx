@@ -10,7 +10,6 @@ import MangaCard from '../manga/MangaCard';
 import { AnimeData } from '@/app/types/AnimeData';
 import { MangaData } from '@/app/types/MangaData';
 
-
 const RankResults = () => {
     const [showManga, setShowManga] = useState(false);
     const { dataList, currentPage, totalPages, handlePageChange } = useRankResults<MangaData | AnimeData>(8, showManga);
@@ -35,26 +34,5 @@ const RankResults = () => {
         </div>
     );
 };
-
-// const RankResults = () => {
-//     const [showManga, setShowManga] = useState(false);
-//     const { animeList, currentPage, totalPages, handlePageChange } = useRankResults(8, showManga); // Fetch 8 results per page
-
-//     return (
-//         <div className="w-screen min-h-screen flex flex-col bg-secondary">
-//             <div className="flex justify-center p-4">
-//                 <ButtonToggle isManga={showManga} onToggle={() => setShowManga(prev => !prev)} />
-//             </div>
-//             <ContentGrid loading={false} error={null}>
-//                 {animeList && animeList.map((anime, index) => (
-//                     <AnimeCard key={index} anime={anime} />
-//                 ))}
-//             </ContentGrid>
-//             {animeList && animeList.length > 0 && (
-//                 <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
-//             )}
-//         </div>
-//     );
-// };
 
 export default RankResults;

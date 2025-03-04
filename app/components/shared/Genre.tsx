@@ -7,7 +7,7 @@ interface GenreProps {
 
 const Genre = ({ genre }: GenreProps) => {
     return (
-        <div className="flex flex-row gap-4">
+        <div className="flex flex-col gap-4 md:flex-row md:gap-4">
             <h2 className="text-xl font-bold flex items-center justify-center">Genres:</h2>
             {genre && genre.map((genre) => (
                 <span

@@ -7,7 +7,7 @@ interface MangaSerializationProps {
 
 const MangaSerialization = ({ serialization }: MangaSerializationProps) => {
     return (
-        <div className="flex flex-col gap-4 w-full sm:max-w-[600px] lg:max-w-[1600px]">
+        <div className="flex flex-col gap-4 w-full sm:max-w-[600px] lg:max-w-[1600px] px-4 sm:px-8">
             <h2 className="text-xl font-semibold text-white">Serialization</h2>
             <div className="flex flex-col gap-4">
                 <ListItem items={serialization} title="Magazine" />
