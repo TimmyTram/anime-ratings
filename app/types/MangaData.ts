@@ -14,10 +14,11 @@ export interface MangaData {
     volumes: number;
     published: MangaPublished;
     authors: MangaAuthors[];
-    serialization: MangaSerialization[];
+    serializations: MangaSerialization[];
     genres: MangaGenres[];
     themes: MangaThemes[];
     demographics: MangaDemographics[];
+    background: string;
 };
 
 export interface MangaImage {

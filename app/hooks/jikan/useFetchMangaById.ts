@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { AnimeData } from '../../types/AnimeData';
+import { MangaData } from '../../types/MangaData';
 
 /**
  * This will only run once per render
@@ -7,7 +7,7 @@ import { AnimeData } from '../../types/AnimeData';
  * @returns 
  */
 const useFetchMangaById = (id: number) => {
-    const [manga, setManga] = useState<AnimeData>();
+    const [manga, setManga] = useState<MangaData>();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
