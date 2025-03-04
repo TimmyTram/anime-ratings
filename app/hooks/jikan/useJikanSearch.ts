@@ -14,11 +14,15 @@ const useJikanSearch = <T>(limit: number = 8, mangaToggle: boolean = false) => {
     const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
     const [dataList, setDataList] = useState<T[]>([]);
     const [totalPages, setTotalPages] = useState(1);
+    const [isLoading, setIsLoading] = useState(false);
 
     // Debounced fetch function
     useEffect(() => {
         const debouncedFetchData = debounce((searchTerm: string) => {
-            const endpoint = mangaToggle ? `https://api.jikan.moe/v4/manga?q=${searchTerm}&page=${currentPage}&limit=${limit}`
+            setIsLoading(true);
+
+            const endpoint = mangaToggle
+                ? `https://api.jikan.moe/v4/manga?q=${searchTerm}&page=${currentPage}&limit=${limit}`
                 : `https://api.jikan.moe/v4/anime?q=${searchTerm}&page=${currentPage}&limit=${limit}`;
 
             fetch(endpoint)
@@ -26,6 +30,10 @@ const useJikanSearch = <T>(limit: number = 8, mangaToggle: boolean = false) => {
                 .then(data => {
                     setDataList(data.data);
                     setTotalPages(data.pagination.last_visible_page);
+                    setIsLoading(false);
+                })
+                .catch(() => {
+                    setIsLoading(false);
                 });
         }, 500);
 
@@ -46,7 +54,7 @@ const useJikanSearch = <T>(limit: number = 8, mangaToggle: boolean = false) => {
         const queryParams = new URLSearchParams();
         if (searchTerm) queryParams.set('q', searchTerm);
         queryParams.set('page', currentPage.toString());
-        router.push(`?${queryParams.toString()}`);
+        router.push(`?${queryParams.toString()}`, { scroll: false });
     }, [searchTerm, currentPage, router]);
 
     // Reset currentPage to 1 when mangaToggle changes
@@ -73,7 +81,8 @@ const useJikanSearch = <T>(limit: number = 8, mangaToggle: boolean = false) => {
         setSearchTerm: handleSearchTermChange,
         currentPage,
         setCurrentPage: handlePageChange,
-        totalPages
+        totalPages,
+        isLoading // Return the isLoading state
     };
 };
 

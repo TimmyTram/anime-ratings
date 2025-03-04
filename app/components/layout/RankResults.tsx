@@ -22,9 +22,9 @@ const RankResults = () => {
             <ContentGrid loading={false} error={null}>
                 {dataList && dataList.map((item, index) => (
                     showManga ? (
-                        <MangaCard key={index} manga={item as MangaData} />
+                        <MangaCard key={`${index}-${currentPage}`} manga={item as MangaData} />
                     ) : (
-                        <AnimeCard key={index} anime={item as AnimeData} />
+                        <AnimeCard key={`${index}-${currentPage}`} anime={item as AnimeData} />
                     )
                 ))}
             </ContentGrid>
