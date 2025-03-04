@@ -1,7 +1,7 @@
 import ContentGrid from './ContentGrid';
 import AnimeCard from '../anime/AnimeCard';
 import Pagination from '../pagination/Pagination';
-import Searchbar from '../ui/SearchBar';
+import Searchbar from '../ui/Searchbar';
 import useAnimeSearch from '../../hooks/jikan/useAnimeSearch';
 
 const SearchResults = () => {
