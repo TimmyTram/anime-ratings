@@ -22,6 +22,11 @@ const useRankResults = <T>(limit: number = 8, mangaToggle: boolean = false) => {
             });
     }, [currentPage, limit, mangaToggle]);
 
+    // Reset currentPage to 1 when mangaToggle changes
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [mangaToggle]);
+
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
         router.push(`?page=${page}`, { scroll: false });

@@ -22,12 +22,13 @@ const Page = () => {
         <div className="py-20 text-white flex flex-col items-center justify-center gap-12">
             <div className="w-full max-w-[1600px] h-128 mx-auto flex flex-col lg:flex-row gap-12">
                 <MangaDetails manga={manga} />
+                <div className="flex flex-col gap-12 items-center justify-center bg-secondarydark p-4 sm:p-8 rounded-lg shadow-lg">
+                    <Genre genre={manga?.genres} />
+                    <Divider />
+                    <MangaThemes themes={manga?.themes} />
+                </div>
             </div>
             <Divider />
-            <Genre genre={manga?.genres} />
-            <Divider />
-            <MangaThemes themes={manga?.themes} />
-            <Divider/>
             <Synopsis synopsis={manga?.synopsis} />
             <Divider />
             <BackgroundInfo background={manga?.background} />

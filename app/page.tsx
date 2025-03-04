@@ -11,7 +11,7 @@ const Page = () => {
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
           priority
-          className="object-cover brightness-50"
+          className="object-cover brightness-50 animate-appear"
         />
         <h1 className="absolute inset-0 flex items-center justify-center text-white font-bold text-4xl md:text-6xl shadow-xl p-4">
           Explore The Depths of Anime and Manga with Placeholdername

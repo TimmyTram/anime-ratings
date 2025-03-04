@@ -14,7 +14,20 @@ const config: Config = {
         softcomplementary: "#70DAB0",
         purplegrad: "#8788cd",
         softpurplegrad: "#B0B1E3",
-      }
+      },
+      keyframes: {
+        appear: {
+          "0%": {
+            opacity: "0",
+          },
+          "100%": {
+            opacity: "1",
+          },
+        },
+       },
+       animation: {
+          appear: "appear 1s ease-in-out",
+       },
     },
   },
   plugins: [],

@@ -16,6 +16,7 @@ export interface AnimeData {
         }
     }
     airing: boolean;
+    status: string;
     background: string;
     broadcast: {
         day: string;

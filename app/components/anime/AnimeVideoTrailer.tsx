@@ -13,7 +13,7 @@ const AnimeVideoTrailer = ({ animeTrailer }: AnimeVideoTrailerProps) => {
         : `${animeTrailer.embed_url}&autoplay=0`;
 
     return (
-        <div className="lg:ml-auto flex flex-col gap-4 px-4 sm:px-8">
+        <div className="lg:ml-auto flex flex-col gap-4 p-4 sm:p-8 bg-secondarydark rounded-lg shadow-lg">
             <h2 className="text-xl font-semibold">Watch Trailer</h2>
             <div className="relative w-full mx-auto h-0 pb-[56.25%] max-w-full lg:w-[800px] lg:h-[450px]">
                 <iframe
