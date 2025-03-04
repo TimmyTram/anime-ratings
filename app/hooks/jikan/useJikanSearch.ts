@@ -49,6 +49,11 @@ const useJikanSearch = <T>(limit: number = 8, mangaToggle: boolean = false) => {
         router.push(`?${queryParams.toString()}`);
     }, [searchTerm, currentPage, router]);
 
+    // Reset currentPage to 1 when mangaToggle changes
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [mangaToggle]);
+
     // Handle page change from pagination
     const handlePageChange = (newPage: number) => {
         if (newPage !== currentPage) {
