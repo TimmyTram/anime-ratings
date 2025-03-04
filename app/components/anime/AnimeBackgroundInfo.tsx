@@ -1,5 +1,3 @@
-import { AnimeData } from "@/app/types/AnimeData";
-
 interface AnimeBackgroundInfoProps {
     background: string | undefined;
     source: string | undefined;

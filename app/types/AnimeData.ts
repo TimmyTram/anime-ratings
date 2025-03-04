@@ -1,3 +1,4 @@
+
 export interface AnimeData {
     mal_id: number; // MAL id
     title: string;

@@ -13,6 +13,7 @@
     "@types/bcryptjs": "^2.4.6",
     "autoprefixer": "^10.4.20",
     "bcryptjs": "^2.4.3",
+    "framer-motion": "^12.4.10",
     "lodash": "^4.17.21",
     "next": "^15.1.6",
     "next-auth": "^4.24.11",

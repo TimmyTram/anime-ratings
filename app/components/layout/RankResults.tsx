@@ -4,18 +4,33 @@ import ContentGrid from './ContentGrid';
 import AnimeCard from '../anime/AnimeCard';
 import Pagination from '../pagination/Pagination';
 import useRankResults from '@/app/hooks/jikan/useRankResults';
+import { useState } from 'react';
+import ButtonToggle from '../ui/ButtonToggle';
+import MangaCard from '../manga/MangaCard';
+import { AnimeData } from '@/app/types/AnimeData';
+import { MangaData } from '@/app/types/MangaData';
 
 const RankResults = () => {
-    const { animeList, currentPage, totalPages, handlePageChange } = useRankResults(8); // Fetch 8 results per page
-    
+    const [showManga, setShowManga] = useState(false);
+    const { dataList, currentPage, totalPages, handlePageChange } = useRankResults<MangaData | AnimeData>(8, showManga);
+
     return (
-        <div>
+        <div className="w-screen min-h-screen flex flex-col bg-secondary">
+            <div className="flex justify-center p-4">
+                <ButtonToggle isManga={showManga} onToggle={() => setShowManga(prev => !prev)} />
+            </div>
             <ContentGrid loading={false} error={null}>
-                {animeList && animeList.map((anime, index) => (
-                    <AnimeCard key={index} anime={anime} />
+                {dataList && dataList.map((item, index) => (
+                    showManga ? (
+                        <MangaCard key={index} manga={item as MangaData} />
+                    ) : (
+                        <AnimeCard key={index} anime={item as AnimeData} />
+                    )
                 ))}
             </ContentGrid>
-            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+            {dataList && dataList.length > 0 && (
+                <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+            )}
         </div>
     );
 };
