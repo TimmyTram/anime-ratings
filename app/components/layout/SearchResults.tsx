@@ -8,14 +8,16 @@ const SearchResults = () => {
     const { searchTerm, setSearchTerm, animeList, currentPage, setCurrentPage, totalPages } = useAnimeSearch(8);
 
     return (
-        <div>
+        <div className="w-screen min-h-screen flex flex-col bg-secondary">
             <Searchbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             <ContentGrid loading={false} error={null}>
                 {animeList && animeList.map((anime, index) => (
                     <AnimeCard key={index} anime={anime} />
                 ))}
             </ContentGrid>
-            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+            {animeList && animeList.length > 0 && (
+                <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+            )}
         </div>
     );
 };

@@ -9,7 +9,7 @@ const SeasonalResults = () => {
     const { animeList, currentPage, totalPages, handlePageChange } = useCurrentSeasonResults(8);
 
     return (
-        <div>
+        <div className="w-screen min-h-screen flex flex-col bg-secondary">
             <h1 className="py-16 text-4xl flex items-center justify-center font-bold italic underline underline-offset-8 decoration-4">
                 Season&apos;s Anime
             </h1>
@@ -18,7 +18,9 @@ const SeasonalResults = () => {
                     <AnimeCard key={index} anime={anime} />
                 ))}
             </ContentGrid>
-            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+            {animeList && animeList.length > 0 && (
+                <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+            )}
         </div>
     );
 };
