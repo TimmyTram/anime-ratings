@@ -1,3 +1,5 @@
+
+// Note: Jikan API returns the same structure for both Anime and Manga.
 export interface AnimeData {
     mal_id: number; // MAL id
     title: string;
