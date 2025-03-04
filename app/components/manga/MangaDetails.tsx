@@ -15,7 +15,7 @@ const MangaDetails = ({ manga }: MangaDetailsProps) => {
     console.log(manga);
     
     return (
-        <div className="flex flex-row gap-4 px-4 sm:px-8">
+        <div className="flex flex-row gap-4 p-4 sm:p-8 bg-secondarydark rounded-lg shadow-lg">
             {manga && (
                 <Image
                     src={manga.images.jpg.large_image_url}
@@ -40,22 +40,26 @@ const MangaDetails = ({ manga }: MangaDetailsProps) => {
 
                 <div className="flex flex-row gap-2">
                     <MedalIcon size={28} />
-                    Rank: {manga?.rank}
+                    <span className="font-bold">Rank:</span> {manga?.rank ?? 'Unknown'}
+                </div>
+
+                <div className="flex flex-row gap-2">
+                    <span className="font-bold">User Score:</span> {manga?.score ?? 'Unknown'} / 10
                 </div>
 
                 <div className="flex flex-row gap-2">
                     <BookVolumeIcon size={28} color={'white'}/>
-                    Volumes: {manga?.volumes}
+                    <span className="font-bold">Volumes:</span>{manga?.volumes ?? 'Unknown'}
                 </div>
 
                 <div className="flex flex-row gap-2">
                     <ChapterIcon size={28} color={'white'} />
-                    Chapters: {manga?.chapters}
+                    <span className="font-bold">Chapters:</span> {manga?.chapters ?? 'Unknown'}
                 </div>
 
                 <div className="flex flex-row gap-2">
                     <InfoIcon size={28} color={'white'} />
-                    Status: {manga?.status}
+                    <span className="font-bold">Status:</span>{manga?.status}
                 </div>
 
             </div>

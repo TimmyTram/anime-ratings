@@ -4,6 +4,7 @@ import MedalIcon from "../icons/Medal.icon";
 import EpisodesIcon from "../icons/Episodes.icon";
 import ClockIcon from "../icons/Clock.icon";
 import CalendarIcon from "../icons/Calendar.icon";
+import TVIcon from "../icons/TV.icon";
 
 interface AnimeDetailsProps {
     anime: AnimeData | undefined;
@@ -11,7 +12,7 @@ interface AnimeDetailsProps {
 
 const AnimeDetails = ({ anime }: AnimeDetailsProps) => {
     return (
-        <div className="flex flex-row gap-4 px-4 sm:px-8">
+        <div className="flex flex-row gap-4 p-4 sm:p-8 bg-secondarydark rounded-lg shadow-lg">
                     {anime && (
                         <Image
                             src={anime.images.jpg.large_image_url}
@@ -36,7 +37,11 @@ const AnimeDetails = ({ anime }: AnimeDetailsProps) => {
 
                         <div className="flex flex-row gap-2">
                             <MedalIcon size={28} />
-                            Rank: {anime?.rank}
+                            <span className="font-bold">Rank:</span>{anime?.rank}
+                        </div>
+
+                        <div className="flex flex-row gap-2">
+                            <span className="font-bold">User Score:</span> {anime?.score ?? "Unknown"} / 10
                         </div>
 
                         <div className="flex flex-row gap-2">
@@ -53,6 +58,12 @@ const AnimeDetails = ({ anime }: AnimeDetailsProps) => {
                             <CalendarIcon size={22} className="text-white" />
                             {anime?.broadcast.string}
                         </div>
+
+                        <div className="flex flex-row gap-2">
+                            <TVIcon size={28} color="white" />
+                            {anime?.status}
+                        </div>
+
                     </div>
                 </div>
     );
