@@ -3,7 +3,7 @@
 import SearchIcon from "../icons/Search.icon";
 import { useRouter, usePathname } from "next/navigation";
 
-const SearchButton = () => {
+const SearchButtonIcon = () => {
     const router = useRouter();
     const pathname = usePathname();
 
@@ -18,4 +18,4 @@ const SearchButton = () => {
     );
 };
 
-export default SearchButton;
+export default SearchButtonIcon;

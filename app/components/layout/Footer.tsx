@@ -3,7 +3,7 @@ import LinkedInIcon from "../icons/LinkedIn.icon";
 
 const Footer = () => {
     return (
-        <div className="pt-12">
+        <div>
             <footer className="footer bg-primary text-white flex items-stretch p-4">
 
                 <div className="flex flex-row gap-2">

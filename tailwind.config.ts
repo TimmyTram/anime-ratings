@@ -7,6 +7,7 @@ const config: Config = {
       colors: {
         primary: "#75b7ea",
         secondary: "#3a4856",
+        secondarydark: "#2f3a45",
         complementary: "#3dc08d",
         angryred: "#f75d5d",
         softangryred: "#f88a8a",

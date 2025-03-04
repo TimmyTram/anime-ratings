@@ -1,12 +1,12 @@
 'use client';
 
 import { Suspense } from "react";
-import SearchResults from "../components/layout/SearchResults";
+import RankResults from "../components/layout/RankResults";
 
 const Page = () => {
     return (
         <Suspense fallback={<div>Loading...</div>}>
-            <SearchResults />
+            <RankResults />
         </Suspense>
     );
 };
