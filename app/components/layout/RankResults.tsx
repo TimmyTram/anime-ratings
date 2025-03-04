@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { AnimeData } from '../../types/AnimeData';
 import ContentGrid from './ContentGrid';
 import AnimeCard from '../anime/AnimeCard';
-import TestPagination from '../pagination/testPagination';
+import Pagination from '../pagination/Pagination';
 
 const RankResults = () => {
     const router = useRouter();
@@ -38,7 +38,7 @@ const RankResults = () => {
                     <AnimeCard key={index} anime={anime} />
                 ))}
             </ContentGrid>
-            <TestPagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
         </div>
     );
 };
