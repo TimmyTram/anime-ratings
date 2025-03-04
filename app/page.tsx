@@ -9,6 +9,8 @@ const Page = () => {
           src="/backdrop.jpg"
           alt="Backdrop"
           fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          priority
           className="object-cover brightness-50"
         />
         <h1 className="absolute inset-0 flex items-center justify-center text-white font-bold text-4xl md:text-6xl shadow-xl p-4">
@@ -39,6 +41,8 @@ const Page = () => {
             src="/search.jpg"
             alt="Search"
             fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            priority
             className="object-cover rounded-lg"
           />
         </div>
@@ -50,6 +54,8 @@ const Page = () => {
             src="/ranking.jpg"
             alt="ranking"
             fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            priority
             className="object-cover rounded-lg"
           />
         </div>
@@ -84,6 +90,8 @@ const Page = () => {
             src="/jikan.jpg"
             alt="jikan"
             fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            priority
             className="object-cover rounded-lg"
           />
         </div>

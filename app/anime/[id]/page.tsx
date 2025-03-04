@@ -18,7 +18,7 @@ const Page = () => {
     if (loading) return <div>Loading...</div>;
 
     return (
-        <div className="pt-20 text-white flex flex-col items-center justify-center gap-12">
+        <div className="py-20 text-white flex flex-col items-center justify-center gap-12">
             <div className="w-full max-w-[1600px] h-128 mx-auto flex flex-col lg:flex-row gap-12">
                 <AnimeDetails anime={anime} />
                 <AnimeVideoTrailer animeTrailer={anime?.trailer} />
