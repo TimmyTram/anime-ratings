@@ -8,7 +8,7 @@ export interface MangaStatisticsData {
 };
 
 export interface MangaScores {
-    scores: number;
+    score: number;
     votes: number;
     percentage: number;
 }

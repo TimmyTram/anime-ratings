@@ -11,11 +11,15 @@ import MangaSerialization from "@/app/components/manga/MangaSerialization";
 import MangaAuthorInfo from "@/app/components/manga/MangaAuthorInfo";
 import Genre from "@/app/components/shared/Genre";
 import MangaThemes from "@/app/components/manga/MangaThemes";
+import useFetchMangaStatisticsById from "@/app/hooks/jikan/useFetchMangaStatisticsById";
+import BarGraph from "@/app/components/shared/BarGraph";
 
 const Page = () => {
     const { id } = useParams();
     const mangaId = Number(id);
     const { manga, loading, error } = useFetchMangaById(mangaId);
+    const { mangaStatistics, loading: loadingStats, error: errorStats } = useFetchMangaStatisticsById(mangaId);
+
     if (loading) return <div>Loading...</div>;
 
     return (
@@ -38,6 +42,8 @@ const Page = () => {
             <MangaPublishInfo published={manga?.published} />
             <Divider />
             <MangaSerialization serialization={manga?.serializations} />
+            <Divider />
+            {mangaStatistics ? <BarGraph rawData={mangaStatistics} type={'manga'} /> : <div>Loading...</div>}
         </div>
     );
 };

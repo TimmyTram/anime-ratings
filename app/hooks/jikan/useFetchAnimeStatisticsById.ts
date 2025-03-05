@@ -15,6 +15,7 @@ const useFetchAnimeStatisticsById = (id: number) => {
                 const data = await res.json();
                 if(data.error) throw new Error(data.error);
                 setAnimeStatistics(data.data);
+                setLoading(false);
             } catch (error: any) {
                 setError(error.message);
             } finally {

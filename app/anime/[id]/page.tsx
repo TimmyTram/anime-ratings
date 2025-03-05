@@ -34,7 +34,7 @@ const Page = () => {
             <Divider />
             <AnimeProductionInfo producers={anime?.producers} licensors={anime?.licensors} studios={anime?.studios} />
             <Divider />
-            {animeStatistics ? <BarGraph rawData={animeStatistics} /> : <div>Loading...</div>}
+            {animeStatistics ? <BarGraph rawData={animeStatistics} type={'anime'} /> : <div>Loading...</div>}
         </div>
     );
 };
