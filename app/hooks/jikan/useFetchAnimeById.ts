@@ -15,7 +15,7 @@ const useFetchAnimeById = (id: number) => {
         const fetchAnimeById = async (id: number) => {
             try {
                 setLoading(true);
-                console.log(`[INFO]: Calling api jikan.moe to fetch ${id}`)
+                console.log(`[INFO]: Calling api jikan.moe to fetch ${id} anime general info.`)
                 const res = await fetch(`https://api.jikan.moe/v4/anime/${id}`);
                 const data = await res.json();
                 if(data.error) throw new Error(data.error);
