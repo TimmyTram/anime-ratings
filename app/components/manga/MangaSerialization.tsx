@@ -1,5 +1,6 @@
 import type { MangaSerialization } from "@/app/types/MangaData";
 import ListItem from "../ui/ListItem";
+import Collapsible from "../ui/Collapsible";
 
 interface MangaSerializationProps {
     serialization: MangaSerialization[] | undefined;
@@ -7,12 +8,11 @@ interface MangaSerializationProps {
 
 const MangaSerialization = ({ serialization }: MangaSerializationProps) => {
     return (
-        <div className="flex flex-col gap-4 w-full sm:max-w-[600px] lg:max-w-[1600px] p-4 sm:p-8 bg-secondarydark rounded-lg shadow-md">
-            <h2 className="text-xl font-semibold text-white">Serialization</h2>
-            <div className="flex flex-col gap-4">
+        <Collapsible title="Serialization" className="w-full sm:max-w-[600px] lg:max-w-[1600px]">
+            <div className="p-2 sm:p-4">
                 <ListItem items={serialization} title="Magazine" />
             </div>
-        </div>
+        </Collapsible>
     );
 };
 

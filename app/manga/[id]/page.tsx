@@ -23,7 +23,7 @@ const Page = () => {
     if (loading) return <div>Loading...</div>;
 
     return (
-        <div className="py-20 text-white flex flex-col items-center justify-center gap-12">
+        <div className="py-20 text-white flex flex-col items-center justify-center gap-12 p-4 sm:p-8">
             <div className="w-full max-w-[1600px] h-128 mx-auto flex flex-col lg:flex-row gap-12">
                 <MangaDetails manga={manga} />
                 <div className="flex flex-col gap-12 items-center justify-center bg-secondarydark p-4 sm:p-8 rounded-lg shadow-lg">
@@ -35,13 +35,15 @@ const Page = () => {
             <Divider />
             <Synopsis synopsis={manga?.synopsis} />
             <Divider />
-            <BackgroundInfo background={manga?.background} />
+            <div className="flex flex-col md:flex-row w-full max-w-[1600px] gap-12">
+                <BackgroundInfo background={manga?.background} />
+                <MangaAuthorInfo authors={manga?.authors} />
+            </div>
             <Divider />
-            <MangaAuthorInfo authors={manga?.authors} />
-            <Divider />
-            <MangaPublishInfo published={manga?.published} />
-            <Divider />
-            <MangaSerialization serialization={manga?.serializations} />
+            <div className="flex flex-col md:flex-row w-full max-w-[1600px] gap-12">
+                <MangaPublishInfo published={manga?.published} />
+                <MangaSerialization serialization={manga?.serializations} />
+            </div>
             <Divider />
             {mangaStatistics ? <BarGraph rawData={mangaStatistics} type={'manga'} /> : <div>Loading...</div>}
         </div>

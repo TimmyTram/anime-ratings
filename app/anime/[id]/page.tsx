@@ -20,7 +20,7 @@ const Page = () => {
     if (loading) return <div>Loading...</div>;
 
     return (
-        <div className="py-20 text-white flex flex-col items-center justify-center gap-12">
+        <div className="py-20 text-white flex flex-col items-center justify-center gap-12 p-4 sm:p-8">
             <div className="w-full max-w-[1600px] h-128 mx-auto flex flex-col lg:flex-row gap-12">
                 <AnimeDetails anime={anime} />
                 <AnimeVideoTrailer animeTrailer={anime?.trailer} />
@@ -30,9 +30,10 @@ const Page = () => {
             <Divider />
             <Synopsis synopsis={anime?.synopsis} />
             <Divider />
-            <BackgroundInfo background={anime?.background} source={anime?.source} season={anime?.season} />
-            <Divider />
-            <AnimeProductionInfo producers={anime?.producers} licensors={anime?.licensors} studios={anime?.studios} />
+            <div className="flex flex-col md:flex-row max-w-[1600px] gap-12">
+                <BackgroundInfo background={anime?.background} source={anime?.source} season={anime?.season} />
+                <AnimeProductionInfo producers={anime?.producers} licensors={anime?.licensors} studios={anime?.studios} />
+            </div>
             <Divider />
             {animeStatistics ? <BarGraph rawData={animeStatistics} type={'anime'} /> : <div>Loading...</div>}
         </div>

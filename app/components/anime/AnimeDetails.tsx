@@ -12,7 +12,7 @@ interface AnimeDetailsProps {
 
 const AnimeDetails = ({ anime }: AnimeDetailsProps) => {
     return (
-        <div className="flex flex-row gap-4 p-4 sm:p-8 bg-secondarydark rounded-lg shadow-lg">
+        <div className="flex flex-col md:flex-row gap-4 p-4 sm:p-8 bg-secondarydark rounded-lg shadow-lg">
                     {anime && (
                         <Image
                             src={anime.images.jpg.large_image_url}

@@ -64,7 +64,7 @@ const BarGraph = ({ rawData, type }: BarGraphProps) => {
     const formattedScores = formatScores(rawData);
 
     return (
-        <Collapsible title="Statistics" className="w-full max-w-[1600px] bg-secondarydark shadow-lg">
+        <Collapsible title="Statistics" className="w-full max-w-[1600px] shadow-lg">
             <div className="flex flex-col p-8 gap-8">
                 <div>
                     <h2 className="flex justify-center items-center text-2xl font-bold text-white">
