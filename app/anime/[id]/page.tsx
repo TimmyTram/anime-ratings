@@ -17,8 +17,6 @@ const Page = () => {
     const animeId = Number(id);
     const { anime, loading, error } = useFetchAnimeById(animeId);
     const { animeStatistics, loading: loadingStats, error: errorStats } = useFetchAnimeStatisticsById(animeId);
-    //console.log(anime);
-    console.log(animeStatistics);
     if (loading) return <div>Loading...</div>;
 
     return (
@@ -36,7 +34,7 @@ const Page = () => {
             <Divider />
             <AnimeProductionInfo producers={anime?.producers} licensors={anime?.licensors} studios={anime?.studios} />
             <Divider />
-            <BarGraph rawData={animeStatistics} />
+            {animeStatistics ? <BarGraph rawData={animeStatistics} /> : <div>Loading...</div>}
         </div>
     );
 };

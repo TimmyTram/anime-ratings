@@ -37,7 +37,7 @@ const AnimeDetails = ({ anime }: AnimeDetailsProps) => {
 
                         <div className="flex flex-row gap-2">
                             <MedalIcon size={28} />
-                            <span className="font-bold">Rank:</span>{anime?.rank}
+                            <span className="font-bold">Rank:</span>{anime?.rank ?? "Unknown"}
                         </div>
 
                         <div className="flex flex-row gap-2">
@@ -51,17 +51,21 @@ const AnimeDetails = ({ anime }: AnimeDetailsProps) => {
 
                         <div className="flex flex-row gap-2">
                             <ClockIcon size={28} className="text-white" />
-                            {anime?.duration}
+                            {anime?.duration ?? "Unknown"}
                         </div>
 
                         <div className="flex flex-row gap-2">
                             <CalendarIcon size={22} className="text-white" />
-                            {anime?.broadcast.string}
+                            {anime?.broadcast.string ?? "Unknown"}
                         </div>
 
                         <div className="flex flex-row gap-2">
                             <TVIcon size={28} color="white" />
-                            {anime?.status}
+                            {anime?.status ?? "Unknown"}
+                        </div>
+
+                        <div className="flex flex-row gap-2">
+                            <span className="font-bold">Members:</span>{anime?.members ?? "Unknown"}
                         </div>
 
                     </div>

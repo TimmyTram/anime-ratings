@@ -33,6 +33,7 @@ export interface AnimeData {
     producers: AnimeProducers[];
     licensors: AnimeLicensors[];
     studios: AnimeStudios[];
+    members: number;
 };
 
 export interface AnimeStudios {

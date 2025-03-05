@@ -8,7 +8,7 @@ export interface AnimeStatisticsData {
 };
 
 export interface AnimeScores {
-    scores: number;
+    score: number;
     votes: number;
     percentage: number;
 }
