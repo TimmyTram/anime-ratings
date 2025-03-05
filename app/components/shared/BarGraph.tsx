@@ -2,6 +2,7 @@ import { AnimeStatisticsData } from '@/app/types/AnimeStatisticsData';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import Divider from '@/app/components/ui/Divider';
 import { MangaStatisticsData } from '@/app/types/MangaStatisticsData';
+import Collapsible from '../ui/Collapsible';
 
 function getTooltipContent(label: string, type: 'status' | 'score', category: 'anime' | 'manga'): string {
     if (type === 'status') {
@@ -43,9 +44,9 @@ function formatData(data: AnimeStatisticsData | MangaStatisticsData | undefined)
 
 function formatScores(data: AnimeStatisticsData | MangaStatisticsData | undefined) {
     if (!data || !data.scores) return [];
-    return data.scores.map((score) => ({ 
+    return data.scores.map((score) => ({
         name: score.score.toString(), // convert to string for tooltips
-        value: score.votes 
+        value: score.votes
     }));
 }
 
@@ -63,37 +64,39 @@ const BarGraph = ({ rawData, type }: BarGraphProps) => {
     const formattedScores = formatScores(rawData);
 
     return (
-        <div className="flex flex-col w-full max-w-[1600px] bg-secondarydark rounded-lg shadow-lg p-8 gap-8">
-            <div>
-                <h2 className="flex justify-center items-center text-2xl font-bold text-white">
-                    {`${type === 'anime' ? 'Anime' : 'Manga'} Watch Status Statistics`}
-                </h2>
+        <Collapsible title="Statistics" className="w-full max-w-[1600px] bg-secondarydark shadow-lg">
+            <div className="flex flex-col p-8 gap-8">
+                <div>
+                    <h2 className="flex justify-center items-center text-2xl font-bold text-white">
+                        {`${type === 'anime' ? 'Anime' : 'Manga'} Watch Status Statistics`}
+                    </h2>
+                </div>
+                <ResponsiveContainer width="100%" height={400}>
+                    <BarChart data={formattedData} margin={{ top: 40, right: 40, left: 40, bottom: 40 }}>
+                        <XAxis dataKey="name" label={{ value: 'Status', position: 'insideBottom', offset: -20 }} />
+                        <YAxis />
+                        <Tooltip content={<WatchTooltip type="status" category={type} />} />
+                        <Legend />
+                        <Bar dataKey="value" fill="#75b7ea" legendType="none" />
+                    </BarChart>
+                </ResponsiveContainer>
+                <Divider />
+                <div>
+                    <h2 className="flex justify-center items-center text-2xl font-bold text-white">
+                        {`${type === 'anime' ? 'Anime' : 'Manga'} Score Statistics`}
+                    </h2>
+                </div>
+                <ResponsiveContainer width="100%" height={400}>
+                    <BarChart data={formattedScores} margin={{ top: 40, right: 40, left: 40, bottom: 40 }}>
+                        <XAxis dataKey="name" label={{ value: 'Scores', position: 'insideBottom', offset: -20 }} />
+                        <YAxis />
+                        <Tooltip content={<WatchTooltip type="score" category={type} />} />
+                        <Legend />
+                        <Bar dataKey="value" fill="#75b7ea" legendType="none" />
+                    </BarChart>
+                </ResponsiveContainer>
             </div>
-            <ResponsiveContainer width="100%" height={400}>
-                <BarChart data={formattedData} margin={{ top: 40, right: 40, left: 40, bottom: 40 }}>
-                    <XAxis dataKey="name" label={{ value: 'Status', position: 'insideBottom', offset: -20 }} />
-                    <YAxis />
-                    <Tooltip content={<WatchTooltip type="status" category={type} />} />
-                    <Legend />
-                    <Bar dataKey="value" fill="#75b7ea" legendType="none" />
-                </BarChart>
-            </ResponsiveContainer>
-            <Divider />
-            <div>
-                <h2 className="flex justify-center items-center text-2xl font-bold text-white">
-                    {`${type === 'anime' ? 'Anime' : 'Manga'} Score Statistics`}
-                </h2>
-            </div>
-            <ResponsiveContainer width="100%" height={400}>
-                <BarChart data={formattedScores} margin={{ top: 40, right: 40, left: 40, bottom: 40 }}>
-                    <XAxis dataKey="name" label={{ value: 'Scores', position: 'insideBottom', offset: -20 }} />
-                    <YAxis />
-                    <Tooltip content={<WatchTooltip type="score" category={type} />} />
-                    <Legend />
-                    <Bar dataKey="value" fill="#75b7ea" legendType="none"/>
-                </BarChart>
-            </ResponsiveContainer>
-        </div>
+        </Collapsible>
     );
 };
 
