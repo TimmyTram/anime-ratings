@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-const useRankResults = <T>(limit: number = 8, mangaToggle: boolean = false) => {
+const useRankResults = <T>(limit: number = 10, mangaToggle: boolean = false) => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const initialPage = parseInt(searchParams.get('page') || '1', 10);
