@@ -14,7 +14,7 @@ import useFetchAnimeStatisticsById from "@/app/hooks/jikan/useFetchAnimeStatisti
 import CommentPost from "@/app/components/comments/CommentPost";
 import { useSession } from "next-auth/react";
 import useFetchAnimeComments from "@/app/hooks/backend/useFetchAnimeComments";
-import CommentList from "@/app/components/comments/CommetList";
+import CommentList from "@/app/components/comments/CommentList";
 
 
 const Page = () => {
