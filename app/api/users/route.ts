@@ -5,8 +5,6 @@ import { checkRequiredArgsFilled } from "../../utils/utils";
 import { ArgumentError } from "../../types/ArgumentError";
 import bcrypt from "bcryptjs";
 
-export const dynamic = 'force-dynamic'
-
 export async function GET() {
     try {
         const users = await prisma.user.findMany(

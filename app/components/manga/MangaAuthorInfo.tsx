@@ -1,5 +1,6 @@
 import type { MangaAuthors } from "@/app/types/MangaData";
 import ListItem from "../ui/ListItem";
+import Collapsible from "../ui/Collapsible";
 
 interface MangaAuthorInfoProps {
     authors: MangaAuthors[] | undefined;
@@ -7,12 +8,11 @@ interface MangaAuthorInfoProps {
 
 const MangaAuthorInfo = ({ authors }: MangaAuthorInfoProps) => {
     return (
-        <div className="flex flex-col gap-4 w-full sm:max-w-[600px] lg:max-w-[1600px] p-4 sm:p-8 bg-secondarydark rounded-lg shadow-md">
-            <h2 className="text-xl font-semibold text-white">Author(s):</h2>
-            <div className="flex flex-col gap-4">
-                <ListItem items={authors} title="Author(s)" />
+        <Collapsible title="Author(s)" className="">
+            <div className="p-4 sm:p-8">
+                <ListItem title="Author(s)" items={authors} />
             </div>
-        </div>
+        </Collapsible>
     );
 };
 

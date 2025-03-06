@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { AnimeData } from '../../types/AnimeData';
 
-const useCurrentSeasonResults = (limit: number = 8) => {
+const useCurrentSeasonResults = (limit: number = 10) => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const initialPage = parseInt(searchParams.get('page') || '1', 10);

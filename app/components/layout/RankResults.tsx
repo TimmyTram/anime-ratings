@@ -12,12 +12,15 @@ import { MangaData } from '@/app/types/MangaData';
 
 const RankResults = () => {
     const [showManga, setShowManga] = useState(false);
-    const { dataList, currentPage, totalPages, handlePageChange } = useRankResults<MangaData | AnimeData>(8, showManga);
+    const { dataList, currentPage, totalPages, handlePageChange } = useRankResults<MangaData | AnimeData>(10, showManga);
 
     return (
         <div className="w-screen min-h-screen flex flex-col bg-secondary">
-            <div className="flex justify-center p-4">
+            <div className="flex flex-col gap-8 items-center justify-center p-8">
                 <ButtonToggle isManga={showManga} onToggle={() => setShowManga(prev => !prev)} />
+                <h1 className="text-4xl font-bold italic underline underline-offset-8 decoration-4">
+                    {showManga ? "Manga" : "Anime"} Rankings
+                </h1>
             </div>
             <ContentGrid loading={false} error={null}>
                 {dataList && dataList.map((item, index) => (

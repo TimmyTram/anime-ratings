@@ -13,7 +13,7 @@ import MangaCard from '../manga/MangaCard';
 
 const SearchResults = () => {
     const [showManga, setShowManga] = useState(false);
-    const { dataList, searchTerm, setSearchTerm, currentPage, setCurrentPage, totalPages } = useJikanSearch<AnimeData | MangaData>(8, showManga);
+    const { dataList, searchTerm, setSearchTerm, currentPage, setCurrentPage, totalPages } = useJikanSearch<AnimeData | MangaData>(10, showManga);
 
     return (
             <div className="w-screen min-h-screen flex flex-col bg-secondary">

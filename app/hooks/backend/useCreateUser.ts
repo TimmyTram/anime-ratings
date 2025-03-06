@@ -1,13 +1,19 @@
 import { useState } from 'react';
 import { UserData } from '../../types/UserData';
 
+/**
+ * 
+ * @returns {Object} - Object containing createUser function and loading state
+ * @returns {Function} createUser - Function to create a new user
+ * @returns {Boolean} loading - Loading state
+ */
 const useCreateUser = () => {
     const [loading, setLoading] = useState(false);
 
     const createUser = async (formData: UserData) => {
         setLoading(true);
         try {
-            const res = await fetch(`api/users`, {
+            const res = await fetch(`/api/users`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

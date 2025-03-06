@@ -11,11 +11,8 @@ interface MangaDetailsProps {
 };
 
 const MangaDetails = ({ manga }: MangaDetailsProps) => {
-    
-    console.log(manga);
-    
     return (
-        <div className="flex flex-row gap-4 p-4 sm:p-8 bg-secondarydark rounded-lg shadow-lg">
+        <div className="flex flex-col md:flex-row gap-4 p-4 sm:p-8 bg-secondarydark rounded-lg shadow-lg">
             {manga && (
                 <Image
                     src={manga.images.jpg.large_image_url}
@@ -48,7 +45,7 @@ const MangaDetails = ({ manga }: MangaDetailsProps) => {
                 </div>
 
                 <div className="flex flex-row gap-2">
-                    <BookVolumeIcon size={28} color={'white'}/>
+                    <BookVolumeIcon size={28} color={'white'} />
                     <span className="font-bold">Volumes:</span>{manga?.volumes ?? 'Unknown'}
                 </div>
 
@@ -60,6 +57,10 @@ const MangaDetails = ({ manga }: MangaDetailsProps) => {
                 <div className="flex flex-row gap-2">
                     <InfoIcon size={28} color={'white'} />
                     <span className="font-bold">Status:</span>{manga?.status}
+                </div>
+
+                <div className="flex flex-row gap-2">
+                    <span className="font-bold">Members:</span>{manga?.members ?? "Unknown"}
                 </div>
 
             </div>

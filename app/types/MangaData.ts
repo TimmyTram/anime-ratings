@@ -19,6 +19,7 @@ export interface MangaData {
     themes: MangaThemes[];
     demographics: MangaDemographics[];
     background: string;
+    members: number;
 };
 
 export interface MangaImage {

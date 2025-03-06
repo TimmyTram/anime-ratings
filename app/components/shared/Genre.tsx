@@ -12,7 +12,7 @@ const Genre = ({ genre }: GenreProps) => {
             {genre && genre.map((genre) => (
                 <span
                     key={genre.mal_id}
-                    className="font-bold bg-purplegrad px-4 py-2 shadow-md rounded-full"
+                    className="flex font-bold bg-purplegrad px-4 py-2 shadow-md rounded-full items-center justify-center"
                 >
                     {genre.name}
                 </span>

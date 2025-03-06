@@ -9,16 +9,26 @@ import AnimeProductionInfo from "@/app/components/anime/AnimeProductionInfo";
 import Synopsis from "@/app/components/shared/Synopsis";
 import BackgroundInfo from "@/app/components/shared/BackgroundInfo";
 import Genre from "@/app/components/shared/Genre";
+import BarGraph from "@/app/components/shared/BarGraph";
+import useFetchAnimeStatisticsById from "@/app/hooks/jikan/useFetchAnimeStatisticsById";
+import CommentPost from "@/app/components/comments/CommentPost";
+import { useSession } from "next-auth/react";
+import CommentList from "@/app/components/comments/CommentList";
+import useFetchComments from "@/app/hooks/backend/useFetchComments";
+
 
 const Page = () => {
+    const { data: session } = useSession();
     const { id } = useParams();
     const animeId = Number(id);
     const { anime, loading, error } = useFetchAnimeById(animeId);
-    console.log(anime);
+    const { animeStatistics, loading: loadingStats, error: errorStats } = useFetchAnimeStatisticsById(animeId);
+    const { comments, loading: commentLoading } = useFetchComments(animeId, 'anime');
+
     if (loading) return <div>Loading...</div>;
 
     return (
-        <div className="py-20 text-white flex flex-col items-center justify-center gap-12">
+        <div className="py-20 text-white flex flex-col items-center justify-center gap-12 p-4 sm:p-8">
             <div className="w-full max-w-[1600px] h-128 mx-auto flex flex-col lg:flex-row gap-12">
                 <AnimeDetails anime={anime} />
                 <AnimeVideoTrailer animeTrailer={anime?.trailer} />
@@ -28,9 +38,16 @@ const Page = () => {
             <Divider />
             <Synopsis synopsis={anime?.synopsis} />
             <Divider />
-            <BackgroundInfo background={anime?.background} source={anime?.source} season={anime?.season} />
+            <div className="flex flex-col md:flex-row max-w-[1600px] gap-12">
+                <BackgroundInfo background={anime?.background} source={anime?.source} season={anime?.season} />
+                <AnimeProductionInfo producers={anime?.producers} licensors={anime?.licensors} studios={anime?.studios} />
+            </div>
             <Divider />
-            <AnimeProductionInfo producers={anime?.producers} licensors={anime?.licensors} studios={anime?.studios} />
+            {animeStatistics ? <BarGraph rawData={animeStatistics} type={'anime'} /> : <div>Loading...</div>}
+            <Divider />
+            {session ? <CommentPost session={session} mal_id={animeId} type="anime" /> : <p>You must Login to Comment</p>}
+            <Divider />
+            <CommentList comments={comments} />
         </div>
     );
 };

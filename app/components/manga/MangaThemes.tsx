@@ -11,7 +11,7 @@ const MangaThemes = ({ themes }: MangaThemesProps) => {
             {themes && themes.map((theme) => (
                 <span
                     key={theme.mal_id}
-                    className="font-bold bg-purplegrad px-4 py-2 shadow-md rounded-full"
+                    className="flex justify-center items-center font-bold bg-purplegrad px-4 py-2 shadow-md rounded-full"
                 >
                     {theme.name}
                 </span>
