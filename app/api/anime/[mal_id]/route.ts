@@ -78,7 +78,12 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ mal
             include: {
                 comments: {
                     include: {
-                        user: true
+                        user: {
+                            select: {
+                                username: true,
+                                role: true
+                            }
+                        }
                     }
                 }
             }

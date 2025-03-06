@@ -7,7 +7,7 @@ const useCreateUser = () => {
     const createUser = async (formData: UserData) => {
         setLoading(true);
         try {
-            const res = await fetch(`api/users`, {
+            const res = await fetch(`/api/users`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

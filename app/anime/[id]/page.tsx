@@ -14,6 +14,7 @@ import useFetchAnimeStatisticsById from "@/app/hooks/jikan/useFetchAnimeStatisti
 import CommentPost from "@/app/components/comments/CommentPost";
 import { useSession } from "next-auth/react";
 import useFetchAnimeComments from "@/app/hooks/backend/useFetchAnimeComments";
+import CommentList from "@/app/components/comments/CommetList";
 
 
 const Page = () => {
@@ -47,6 +48,8 @@ const Page = () => {
             {animeStatistics ? <BarGraph rawData={animeStatistics} type={'anime'} /> : <div>Loading...</div>}
             <Divider />
             {session ? <CommentPost session={session} mal_id={animeId} type="anime" /> : <p>You must Login to Comment</p>}
+            <Divider />
+            <CommentList comments={comments} />
         </div>
     );
 };
