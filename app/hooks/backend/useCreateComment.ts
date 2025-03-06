@@ -1,17 +1,22 @@
-
+'use client';
 
 import { useState } from 'react';
 import { Session } from 'next-auth';
 import { CommentData } from '../../types/CommentData';
 
+/**
+ * @returns {Object} - Returns an object with the following properties:
+ * - createComment: A function that creates a comment on an anime or manga.
+ * - loading: A boolean that indicates if the request is loading.
+ */
 const useCreateComment = () => {
     const [loading, setLoading] = useState(false);
 
-    const createComment = async (session: Session, mal_id: number, body: CommentData) => {
+    const createComment = async (session: Session, mal_id: number, body: CommentData, type: 'anime' | 'manga') => {
         setLoading(true);
         try {
             if(!session) throw new Error('You must be logged in to comment.');
-            const res = await fetch(`/api/anime/${mal_id}`, {
+            const res = await fetch(`/api/${type}/${mal_id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

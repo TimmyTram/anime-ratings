@@ -3,7 +3,13 @@
 import { useState, useEffect } from 'react';
 import { CommentData } from '../../types/CommentData';
 
-const useFetchAnimeComments = (mal_id: number) => {
+/**
+ * 
+ * @param mal_id Jikan Mal ID
+ * @param type Anime or Manga route
+ * @returns comments and loading state
+ */
+const useFetchComments = (mal_id: number, type: 'anime' | 'manga') => {
     const [comments, setComments] = useState<CommentData[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -11,16 +17,16 @@ const useFetchAnimeComments = (mal_id: number) => {
     useEffect(() => {
         const fetchComments = async () => {
             setLoading(true);
-            const res = await fetch(`/api/anime/${mal_id}`);
+            const res = await fetch(`/api/${type}/${mal_id}`);
             const data = await res.json();
             setComments(data);
             setLoading(false);
         };
 
         fetchComments();
-    }, [mal_id]);
+    }, [mal_id, type]);
 
     return { comments, loading };
 };
 
-export default useFetchAnimeComments;
+export default useFetchComments;

@@ -10,7 +10,6 @@ const useFetchMangaStatisticsById = (id: number) => {
         const fetchMangaStatisticsById = async (id: number) => {
             try {
                 setLoading(true);
-                console.log(`[INFO]: Calling api jikan.moe to fetch ${id} Manga statistics`);
                 const res = await fetch(`https://api.jikan.moe/v4/manga/${id}/statistics`);
                 const data = await res.json();
                 if(data.error) throw new Error(data.error);

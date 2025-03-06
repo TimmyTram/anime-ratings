@@ -26,7 +26,7 @@ const CommentPost = ({ session, mal_id, type }: CommentPostProps) => {
             toast.error('Comment cannot be empty.');
             return;
         }
-        const status = await createComment(session, mal_id, { text: comment } as CommentData);
+        const status = await createComment(session, mal_id, { text: comment } as CommentData, type);
         if (status.success) {
             toast.success(status.message);
             

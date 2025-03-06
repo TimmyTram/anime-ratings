@@ -13,12 +13,18 @@ import Genre from "@/app/components/shared/Genre";
 import MangaThemes from "@/app/components/manga/MangaThemes";
 import useFetchMangaStatisticsById from "@/app/hooks/jikan/useFetchMangaStatisticsById";
 import BarGraph from "@/app/components/shared/BarGraph";
+import useFetchComments from "@/app/hooks/backend/useFetchComments";
+import { useSession } from "next-auth/react";
+import CommentPost from "@/app/components/comments/CommentPost";
+import CommentList from "@/app/components/comments/CommentList";
 
 const Page = () => {
+    const { data: session } = useSession();
     const { id } = useParams();
     const mangaId = Number(id);
     const { manga, loading, error } = useFetchMangaById(mangaId);
     const { mangaStatistics, loading: loadingStats, error: errorStats } = useFetchMangaStatisticsById(mangaId);
+    const { comments, loading: commentLoading } = useFetchComments(mangaId, 'manga');
 
     if (loading) return <div>Loading...</div>;
 
@@ -46,6 +52,10 @@ const Page = () => {
             </div>
             <Divider />
             {mangaStatistics ? <BarGraph rawData={mangaStatistics} type={'manga'} /> : <div>Loading...</div>}
+            <Divider />
+            {session ? <CommentPost session={session} mal_id={mangaId} type="manga" /> : <p>You must Login to Comment</p>}
+            <Divider />
+            <CommentList comments={comments} />
         </div>
     );
 };

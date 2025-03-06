@@ -11,9 +11,6 @@ interface MangaDetailsProps {
 };
 
 const MangaDetails = ({ manga }: MangaDetailsProps) => {
-
-    console.log(manga);
-
     return (
         <div className="flex flex-col md:flex-row gap-4 p-4 sm:p-8 bg-secondarydark rounded-lg shadow-lg">
             {manga && (

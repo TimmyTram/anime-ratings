@@ -8,10 +8,9 @@ import { COMMENT_MAX_LENGTH } from "@/app/utils/constants";
 
 export const dynamic = 'force-dynamic';
 
-// why does nextjs 15 keep changing the way it handles dynamic routes
 export async function POST(req: NextRequest, { params }: { params: Promise<{ mal_id: string }> }) {
     const session = await getServerSession(authOptions);
-    
+
     // protect route
     if (!session) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -20,11 +19,11 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ mal
     try {
         const { mal_id } = await params;
         const body: CommentData = await req.json();
-        
+
         checkRequiredArgsFilled(body, ["text"]);
 
-        // Check if anime post exists
-        const animePost = await prisma.animePost.findUnique({
+        // check if manga post exists
+        const mangaPost = await prisma.mangaPost.findUnique({
             where: {
                 mal_id
             }
@@ -34,9 +33,9 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ mal
             return NextResponse.json({ error: `Comment is too long | Over by: ${body.text.length - COMMENT_MAX_LENGTH} charcters.` }, { status: 400 });
         }
 
-        // If anime post doesn't exist, create it
-        if (!animePost) {
-            await prisma.animePost.create({
+        // If manga post doesn't exist, create it
+        if (!mangaPost) {
+            await prisma.mangaPost.create({
                 data: {
                     mal_id
                 }
@@ -52,7 +51,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ mal
                         id: session.user.id
                     }
                 },
-                animePost: {
+                mangaPost: {
                     connect: {
                         mal_id
                     }
@@ -61,19 +60,19 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ mal
         });
 
         return NextResponse.json(comment, { status: 201 });
-    } catch (error: any) {
-        console.log(`[ERROR]: Error in POST /api/anime/[mal_id]/route.ts: ${error.message}`);
-        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    } catch (error : any) {
+        console.log(`[ERROR]: Error in POST /api/manga/[mal_id]/route.ts: ${error.message}`);
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
-}
+};
 
-// route to get comments for this anime post
-export async function GET(_req: NextRequest, { params }: { params: Promise<{ mal_id: string }> }) {
+// route to get comments for this manga post
+export async function GET(_req: NextRequest, { params }: { params: Promise<{ mal_id: string }>}) {
     try {
         const { mal_id } = await params;
-        
-        // check if anime post exists
-        const animePost = await prisma.animePost.findUnique({
+
+        // check if manga post exists
+        const mangaPost = await prisma.mangaPost.findUnique({
             where: {
                 mal_id
             },
@@ -91,16 +90,17 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ mal
             }
         });
 
-        // if anime post doesn't exist, it just means it probably hasn't been created.
-        // *Anime post is created when a comment is made on it*
+        // if manga post doesn't exist, it just means it probably hasn't been created.
+        // *Manga post is created when a comment is made on it*
         // normally this would return 404 with an error message, but we'll just return an empty array
-        if (!animePost) {
+        if (!mangaPost) {
             return NextResponse.json([]);
         }
 
-        return NextResponse.json(animePost.comments);
+        return NextResponse.json(mangaPost.comments);
     } catch (error: any) {
-        console.log(`[ERROR]: Error in GET /api/anime/[mal_id]/route.ts: ${error.message}`);
-        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 }); 
+        console.log(`[ERROR]: Error in GET /api/manga/[mal_id]/route.ts: ${error.message}`);
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+        
     }
-};
+}
