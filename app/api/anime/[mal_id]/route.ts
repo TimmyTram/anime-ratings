@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/authOptions";
 import { CommentData } from "@/app/types/CommentData";
 import { checkRequiredArgsFilled } from "@/app/utils/utils";
+import { COMMENT_MAX_LENGTH } from "@/app/utils/constants";
 
 export const dynamic = 'force-dynamic';
 
@@ -28,6 +29,10 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ mal
                 mal_id
             }
         });
+
+        if (body.text.length > COMMENT_MAX_LENGTH) {
+            return NextResponse.json({ error: `Comment is too long | Over by: ${body.text.length - COMMENT_MAX_LENGTH} charcters.` }, { status: 400 });
+        }
 
         // If anime post doesn't exist, create it
         if (!animePost) {

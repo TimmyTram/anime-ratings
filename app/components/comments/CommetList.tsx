@@ -9,7 +9,7 @@ interface CommentListProps {
 
 const CommentList = ({ comments }: CommentListProps) => {
     return (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 w-full max-w-[1600px] mx-auto">
             {comments && comments.map(comment => (
                 <Comment
                     key={comment.id}
