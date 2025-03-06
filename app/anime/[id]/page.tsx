@@ -13,6 +13,8 @@ import BarGraph from "@/app/components/shared/BarGraph";
 import useFetchAnimeStatisticsById from "@/app/hooks/jikan/useFetchAnimeStatisticsById";
 import CommentPost from "@/app/components/comments/CommentPost";
 import { useSession } from "next-auth/react";
+import useFetchAnimeComments from "@/app/hooks/backend/useFetchAnimeComments";
+
 
 const Page = () => {
     const { data: session } = useSession();
@@ -20,6 +22,9 @@ const Page = () => {
     const animeId = Number(id);
     const { anime, loading, error } = useFetchAnimeById(animeId);
     const { animeStatistics, loading: loadingStats, error: errorStats } = useFetchAnimeStatisticsById(animeId);
+    const { comments, loading: commentLoading } = useFetchAnimeComments(animeId);
+
+    console.log(comments);
 
     if (loading) return <div>Loading...</div>;
 
