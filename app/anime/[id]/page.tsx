@@ -23,7 +23,7 @@ const Page = () => {
     const animeId = Number(id);
     const { anime, loading, error } = useFetchAnimeById(animeId);
     const { animeStatistics, loading: loadingStats, error: errorStats } = useFetchAnimeStatisticsById(animeId);
-    const { comments, loading: commentLoading } = useFetchComments(animeId, 'anime');
+    const { comments, loading: commentLoading, loadMoreComments, hasMore } = useFetchComments(animeId, 'anime', 10);
 
     if (loading) return <div>Loading...</div>;
 
@@ -48,6 +48,8 @@ const Page = () => {
             {session ? <CommentPost session={session} mal_id={animeId} type="anime" /> : <p>You must Login to Comment</p>}
             <Divider />
             <CommentList comments={comments} />
+            {commentLoading && <p>Loading...</p>}
+            {hasMore && <button onClick={loadMoreComments} className="bg-secondarydark p-4 rounded-lg shadow-lg">Load More Comments</button>}
         </div>
     );
 };

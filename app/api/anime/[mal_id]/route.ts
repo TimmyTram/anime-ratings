@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/authOptions";
 import { CommentData } from "@/app/types/CommentData";
 import { checkRequiredArgsFilled } from "@/app/utils/utils";
-import { COMMENT_MAX_LENGTH } from "@/app/utils/constants";
+import { COMMENT_MAX_LENGTH, MAX_FETCH_COMMENT_LIMIT } from "@/app/utils/constants";
 
 export const dynamic = 'force-dynamic';
 
@@ -68,9 +68,23 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ mal
 }
 
 // route to get comments for this anime post
-export async function GET(_req: NextRequest, { params }: { params: Promise<{ mal_id: string }> }) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ mal_id: string }> }) {
     try {
         const { mal_id } = await params;
+
+        const { searchParams } = new URL(req.url);
+        const page = parseInt(searchParams.get('page') || '1');
+        let limit = parseInt(searchParams.get('limit') || '10');
+
+        if(page < 1 || limit < 1) {
+            return NextResponse.json({ error: "Invalid page or limit" }, { status: 400 });
+        }
+
+        // limit the amount of comments that can be fetched
+        limit = Math.min(MAX_FETCH_COMMENT_LIMIT, limit);
+
+        // how many entries to skip over
+        const skip = (page - 1) * limit;
         
         // check if anime post exists
         const animePost = await prisma.animePost.findUnique({
@@ -79,6 +93,8 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ mal
             },
             include: {
                 comments: {
+                    skip,
+                    take: limit,
                     include: {
                         user: {
                             select: {
@@ -98,7 +114,22 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ mal
             return NextResponse.json([]);
         }
 
-        return NextResponse.json(animePost.comments);
+        const totalComments = await prisma.comment.count({
+            where: {
+                animePost: {
+                    mal_id
+                }
+            }
+        });
+
+        return NextResponse.json({
+            pagination: {
+                currentPage: page,
+                totalPages: Math.ceil(totalComments / limit),
+                totalComments
+            },
+            comments: animePost.comments
+        });
     } catch (error: any) {
         console.log(`[ERROR]: Error in GET /api/anime/[mal_id]/route.ts: ${error.message}`);
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 }); 
