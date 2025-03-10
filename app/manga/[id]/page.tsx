@@ -24,7 +24,7 @@ const Page = () => {
     const mangaId = Number(id);
     const { manga, loading, error } = useFetchMangaById(mangaId);
     const { mangaStatistics, loading: loadingStats, error: errorStats } = useFetchMangaStatisticsById(mangaId);
-    const { comments, loading: commentLoading } = useFetchComments(mangaId, 'manga');
+    const { comments, loading: commentLoading, loadMoreComments, hasMore } = useFetchComments(mangaId, 'manga', 10);
 
     if (loading) return <div>Loading...</div>;
 
@@ -56,6 +56,14 @@ const Page = () => {
             {session ? <CommentPost session={session} mal_id={mangaId} type="manga" /> : <p>You must Login to Comment</p>}
             <Divider />
             <CommentList comments={comments} />
+            {commentLoading && <p>Loading...</p>}
+            {hasMore &&
+                <button
+                    onClick={loadMoreComments}
+                    className="bg-secondarydark p-4 rounded-lg shadow-lg">
+                    Load More Comments
+                </button>
+            }
         </div>
     );
 };

@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/authOptions";
 import { CommentData } from "@/app/types/CommentData";
 import { checkRequiredArgsFilled } from "@/app/utils/utils";
-import { COMMENT_MAX_LENGTH } from "@/app/utils/constants";
+import { COMMENT_MAX_LENGTH, MAX_FETCH_COMMENT_LIMIT } from "@/app/utils/constants";
 
 export const dynamic = 'force-dynamic';
 
@@ -60,16 +60,28 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ mal
         });
 
         return NextResponse.json(comment, { status: 201 });
-    } catch (error : any) {
+    } catch (error: any) {
         console.log(`[ERROR]: Error in POST /api/manga/[mal_id]/route.ts: ${error.message}`);
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 };
 
 // route to get comments for this manga post
-export async function GET(_req: NextRequest, { params }: { params: Promise<{ mal_id: string }>}) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ mal_id: string }> }) {
     try {
         const { mal_id } = await params;
+
+        const { searchParams } = new URL(req.url);
+        const page = parseInt(searchParams.get('page') || '1');
+        let limit = parseInt(searchParams.get('limit') || '10');
+
+        if (page < 1 || limit < 1) {
+            return NextResponse.json({ error: "Invalid page or limit" }, { status: 400 });
+        }
+
+        limit = Math.min(MAX_FETCH_COMMENT_LIMIT, limit);
+
+        const skip = (page - 1) * limit;
 
         // check if manga post exists
         const mangaPost = await prisma.mangaPost.findUnique({
@@ -78,6 +90,8 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ mal
             },
             include: {
                 comments: {
+                    skip,
+                    take: limit,
                     include: {
                         user: {
                             select: {
@@ -97,10 +111,25 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ mal
             return NextResponse.json([]);
         }
 
-        return NextResponse.json(mangaPost.comments);
+        const totalComments = await prisma.comment.count({
+            where: {
+                mangaPost: {
+                    mal_id
+                }
+            }
+        });
+
+        return NextResponse.json({
+            pagination: {
+                currentPage: page,
+                totalPages: Math.ceil(totalComments / limit),
+                totalComments
+            },
+            comments: mangaPost.comments
+        });
     } catch (error: any) {
         console.log(`[ERROR]: Error in GET /api/manga/[mal_id]/route.ts: ${error.message}`);
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
-        
+
     }
 }
