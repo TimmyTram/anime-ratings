@@ -11,20 +11,14 @@ import BackgroundInfo from "@/app/components/shared/BackgroundInfo";
 import Genre from "@/app/components/shared/Genre";
 import BarGraph from "@/app/components/shared/BarGraph";
 import useFetchAnimeStatisticsById from "@/app/hooks/jikan/useFetchAnimeStatisticsById";
-import CommentPost from "@/app/components/comments/CommentPost";
-import { useSession } from "next-auth/react";
-import CommentList from "@/app/components/comments/CommentList";
-import useFetchComments from "@/app/hooks/backend/useFetchComments";
 import CommentSection from "@/app/components/comments/CommentSection";
-
+import AnimeStreaming from "@/app/components/anime/AnimeStreaming";
 
 const Page = () => {
-    const { data: session } = useSession();
     const { id } = useParams();
     const animeId = Number(id);
     const { anime, loading, error } = useFetchAnimeById(animeId);
     const { animeStatistics, loading: loadingStats, error: errorStats } = useFetchAnimeStatisticsById(animeId);
-    // const { comments, loading: commentLoading, loadMoreComments, hasMore } = useFetchComments(animeId, 'anime', 10);
 
     if (loading) return <div>Loading...</div>;
 
@@ -34,6 +28,7 @@ const Page = () => {
                 <AnimeDetails anime={anime} />
                 <AnimeVideoTrailer animeTrailer={anime?.trailer} />
             </div>
+            <AnimeStreaming animeId={animeId} />
             <Divider />
             <Genre genre={anime?.genres} />
             <Divider />

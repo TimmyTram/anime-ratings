@@ -29,7 +29,7 @@ const CommentPost = ({ session, mal_id, type, onAddComment }: CommentPostProps) 
         }
         const status = await createComment(session, mal_id, { text: comment } as CommentData, type);
         if (status.success) {
-            const newComment = {
+            const newComment = { // have to create an object that matches what CommentList expects
                 ...status.data,
                 user: {
                     username: session.user.username,

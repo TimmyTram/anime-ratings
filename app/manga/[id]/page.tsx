@@ -13,14 +13,9 @@ import Genre from "@/app/components/shared/Genre";
 import MangaThemes from "@/app/components/manga/MangaThemes";
 import useFetchMangaStatisticsById from "@/app/hooks/jikan/useFetchMangaStatisticsById";
 import BarGraph from "@/app/components/shared/BarGraph";
-import useFetchComments from "@/app/hooks/backend/useFetchComments";
-import { useSession } from "next-auth/react";
-import CommentPost from "@/app/components/comments/CommentPost";
-import CommentList from "@/app/components/comments/CommentList";
 import CommentSection from "@/app/components/comments/CommentSection";
 
 const Page = () => {
-    const { data: session } = useSession();
     const { id } = useParams();
     const mangaId = Number(id);
     const { manga, loading, error } = useFetchMangaById(mangaId);

@@ -17,8 +17,6 @@ const CommentSection = ({ mal_id, type }: CommentSectionProps) => {
     const { comments, loading, loadMoreComments, hasMore } = useFetchComments(mal_id, type, 10);
     const [commentList, setCommentList] = useState<CommentData[]>(comments);
 
-    console.log(comments);
-
     useEffect(() => {
         setCommentList(comments);
     }, [comments]);

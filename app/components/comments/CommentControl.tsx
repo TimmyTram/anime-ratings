@@ -27,8 +27,8 @@ const CommentControl = ({ commentId, onDelete }: CommentControlProps) => {
     }
 
     return (
-        <div>
-            <button onClick={handleDelete} className="text-angryred">Delete</button>
+        <div className="flex justify-center items-center bg-secondary p-2 rounded-lg shadow-lg text-angryred">
+            <button onClick={handleDelete}>Delete</button>
         </div>
     );
 };
