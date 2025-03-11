@@ -25,7 +25,7 @@ const CommentList = ({ comments, onDeleteComment }: CommentListProps) => {
                         text={comment.text}
                         username={comment.user.username}
                         role={comment.user.role}
-                        onDelete={() => onDeleteComment(comment.id)}
+                        onDeleteComment={onDeleteComment}
                     />
                 ))
             )}

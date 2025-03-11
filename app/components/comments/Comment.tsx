@@ -9,10 +9,10 @@ interface CommentProps {
     text: string;
     username: string;
     role: string;
-    onDelete: () => void;
+    onDeleteComment: (commentId: string) => void;
 }
 
-const Comment = ({ id, creationDate, text, username, role, onDelete }: CommentProps) => {
+const Comment = ({ id, creationDate, text, username, role, onDeleteComment }: CommentProps) => {
     return (
         <div className="flex flex-col md:flex-row gap-4 p-4 bg-secondarydark rounded-lg shadow-lg">
             <div className="flex flex-row gap-2">
@@ -24,7 +24,7 @@ const Comment = ({ id, creationDate, text, username, role, onDelete }: CommentPr
                 <span className="px-2 md:px-8 break-words">{text}</span>
             </div>
             <div className="flex flex-col justify-end">
-                <CommentControl commentId={id} onDelete={onDelete} />
+                <CommentControl commentId={id} onDeleteComment={onDeleteComment} />
             </div>
         </div>
     );
