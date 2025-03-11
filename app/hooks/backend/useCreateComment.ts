@@ -34,7 +34,8 @@ const useCreateComment = () => {
             if(data.error) throw new Error(data.error);
             return {
                 success: true,
-                message: data.message
+                message: data.message,
+                data: data
             };
         } catch (error: any) {
             return {

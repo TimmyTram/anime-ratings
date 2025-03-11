@@ -23,7 +23,7 @@ const useFetchComments = (mal_id: number, type: 'anime' | 'manga', limit: number
             console.log(`[INFO]: Calling /api/${type}/${mal_id}?page=${pageNum}&limit=${limit}`);
             const res = await fetch(`/api/${type}/${mal_id}?page=${pageNum}&limit=${limit}`);
             const data = await res.json();
-            
+
             // If we are fetching the first page, replace the comments with the new ones
             // Otherwise, append the new comments to the existing ones
             setComments((prev) => pageNum === 1 ? data.comments : [...prev, ...data.comments]);

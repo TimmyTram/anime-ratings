@@ -11,9 +11,10 @@ interface CommentPostProps {
     session: Session;
     mal_id: number;
     type: "anime" | "manga";
+    onAddComment: (newComment: CommentData) => void;
 }
 
-const CommentPost = ({ session, mal_id, type }: CommentPostProps) => {
+const CommentPost = ({ session, mal_id, type, onAddComment }: CommentPostProps) => {
     const { loading, createComment } = useCreateComment();
     const [comment, setComment] = useState<string>('');
     const [textareaFocused, setTextareaFocused] = useState<boolean>(false);
@@ -28,8 +29,16 @@ const CommentPost = ({ session, mal_id, type }: CommentPostProps) => {
         }
         const status = await createComment(session, mal_id, { text: comment } as CommentData, type);
         if (status.success) {
+            const newComment = { // have to create an object that matches what CommentList expects
+                ...status.data,
+                user: {
+                    username: session.user.username,
+                    role: session.user.role,
+                }
+            } as CommentData;
+            onAddComment(newComment); // update parent component
             toast.success(status.message);
-            
+     
             // reset textarea
             setComment('');
             setPlaceholder('Write a comment...');

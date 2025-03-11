@@ -108,7 +108,14 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ mal_
         // *Manga post is created when a comment is made on it*
         // normally this would return 404 with an error message, but we'll just return an empty array
         if (!mangaPost) {
-            return NextResponse.json([]);
+            return NextResponse.json({
+                pagination: {
+                    currentPage: page,
+                    totalPages: 1,
+                    totalComments: 0
+                },
+                comments: []
+            });
         }
 
         const totalComments = await prisma.comment.count({

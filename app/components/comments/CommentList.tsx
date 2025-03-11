@@ -5,9 +5,10 @@ import Comment from "./Comment";
 
 interface CommentListProps {
     comments: CommentData[];
+    onDeleteComment: (commentId: string) => void;
 }
 
-const CommentList = ({ comments }: CommentListProps) => {
+const CommentList = ({ comments, onDeleteComment }: CommentListProps) => {
     return (
         <div className="flex flex-col gap-4 w-full max-w-[1600px] mx-auto">
             {comments.length === 0 ? (
@@ -19,10 +20,12 @@ const CommentList = ({ comments }: CommentListProps) => {
                 comments.map(comment => (
                     <Comment
                         key={comment.id}
+                        id={comment.id}
                         creationDate={comment.creationDate}
                         text={comment.text}
                         username={comment.user.username}
                         role={comment.user.role}
+                        onDelete={() => onDeleteComment(comment.id)}
                     />
                 ))
             )}
