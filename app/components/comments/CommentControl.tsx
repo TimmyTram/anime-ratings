@@ -7,10 +7,10 @@ import toast from "react-hot-toast";
 
 interface CommentControlProps {
     commentId: string;
-    onDelete: () => void;
+    onDeleteComment: (commentId: string) => void;
 } 
 
-const CommentControl = ({ commentId, onDelete }: CommentControlProps) => {
+const CommentControl = ({ commentId, onDeleteComment }: CommentControlProps) => {
     const {data: session} = useSession();
     const { loading, deleteComment } = useDeleteComment();
     
@@ -19,7 +19,7 @@ const CommentControl = ({ commentId, onDelete }: CommentControlProps) => {
     const handleDelete = async () => {
         const res = await deleteComment(commentId, session);
         if(res.status === 'success') {
-            onDelete(); // tell parent component to update
+            onDeleteComment(commentId); // tell parent component to update
             toast.success(res.message);
         } else {
             toast.error(res.message);
