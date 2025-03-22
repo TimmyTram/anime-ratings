@@ -20,7 +20,7 @@ const Page = () => {
 
       <div className="flex-1 justify-center items-center p-4 md:p-8">
         <p className="text-center text-base md:text-lg">
-          Welcome to Tokei. Placeholder name is used to discover and search for new anime and manga, whether it&apos;s for seasonal animes or up-and-coming anime and manga, Tokei is where you want to be.
+          Welcome to Tokei. Tokei is used to discover and search for new anime and manga, whether it&apos;s for seasonal animes or up-and-coming anime and manga, Tokei is where you want to be.
         </p>
       </div>
 
